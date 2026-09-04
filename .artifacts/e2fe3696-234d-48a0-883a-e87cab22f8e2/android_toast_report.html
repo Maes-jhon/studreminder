@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Android Toast Documentation</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #000; max-width: 800px; margin: 40px auto; padding: 20px; }
+        h1 { text-align: center; font-size: 24px; text-transform: uppercase; text-decoration: underline; margin-bottom: 40px; }
+        h2 { font-size: 18px; margin-top: 30px; border-bottom: 1px solid #000; padding-bottom: 5px; font-weight: bold; }
+        h3 { font-size: 16px; margin-top: 20px; font-weight: bold; }
+        .code-block { font-family: 'monospace'; background: #f4f4f4; border: 1px solid #000; padding: 12px; margin: 10px 0; font-size: 14px; }
+        p, li { font-size: 15px; margin-bottom: 10px; }
+        ul { padding-left: 20px; }
+        @media print {
+            body { margin: 0; padding: 1cm; }
+            @page { margin: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ANDROID TOAST DOCUMENTATION</h1>
+
+    <h2>1. Where Android Toast is Applied in the Project</h2>
+    <p>Android Toast is currently applied in the <b>Subject</b> and <b>Schedule</b> modules of the <b>StudReminder</b> application. It is used to give the user immediate, non-intrusive feedback about the result of an action — specifically, whether their attempt to add a subject or save a schedule succeeded or failed — without interrupting their workflow or requiring them to dismiss a dialog box.</p>
+
+    <h3>Purpose of the Toast Applied</h3>
+    <ul>
+        <li>In the <b>AddSubjectActivity</b>, Toast is used to inform the user whether their entered subject details were successfully saved. This gives immediate confirmation of success ("Subject Added") or a clear indication of failure ("Failed") so the user knows the status of their data entry.</li>
+        <li>In <b>AddSubjectActivity</b> and <b>AddScheduleActivity</b>, Toast is also used for input validation — for example, alerting the user when a required field like the subject name, teacher, or room is left empty.</li>
+        <li>In <b>ReviewAdapter</b>, Toast confirms the successful deletion of a review session, guiding the user that the record has been removed from the list.</li>
+        <li>Overall, Toast messages were chosen because they are lightweight, appear briefly on screen, and do not require the user to tap anything to dismiss them — making them ideal for quick status updates like successful data entry or validation results.</li>
+    </ul>
+
+    <h2>2. Explanation of the Toast Code</h2>
+
+    <h3>Example 1 — Successful Subject Entry</h3>
+    <div class="code-block">Toast.makeText(this, "Subject Added", Toast.LENGTH_SHORT).show();</div>
+    <p><b>Explanation:</b></p>
+    <ul>
+        <li><b>Toast.makeText(...)</b> creates a new Toast object with three arguments.</li>
+        <li><b>this</b> refers to the current context (AddSubjectActivity), which tells Android which screen/application the Toast belongs to.</li>
+        <li><b>"Subject Added"</b> is the message string that will be displayed to the user.</li>
+        <li><b>Toast.LENGTH_SHORT</b> sets how long the message stays visible on screen (a brief duration, roughly 2 seconds).</li>
+        <li><b>.show()</b> is called at the end to actually display the Toast on screen; without this, the Toast object is created but never shown.</li>
+    </ul>
+
+    <h3>Example 2 — Failed Data Entry</h3>
+    <div class="code-block">Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();</div>
+    <p><b>Explanation:</b></p>
+    <ul>
+        <li>This follows the exact same structure as Example 1, but is placed inside the else branch of the database insertion logic — meaning it only runs when the database helper returns false (the data was not saved). This gives the user clear, immediate feedback that the operation failed.</li>
+    </ul>
+
+    <h3>Example 3 — Empty Field Validation</h3>
+    <div class="code-block">Toast.makeText(this, "Complete all fields", Toast.LENGTH_SHORT).show();</div>
+    <p><b>Explanation:</b></p>
+    <ul>
+        <li>This Toast is triggered inside an if statement that checks whether the subject name, teacher, or room fields are empty before the app even attempts to save to the database. This prevents unnecessary database calls and immediately tells the user what is missing.</li>
+    </ul>
+
+    <h3>Example 4 — Successful Review Deletion</h3>
+    <div class="code-block">Toast.makeText(context, "Review Deleted", Toast.LENGTH_SHORT).show();</div>
+    <p><b>Explanation:</b></p>
+    <ul>
+        <li>This Toast runs after the delete method is called in the adapter, confirming that the record was successfully removed from the SQLite database. It provides the user with visual confirmation of their deletion request.</li>
+    </ul>
+
+</body>
+</html>

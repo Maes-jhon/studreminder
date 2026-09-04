@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StudReminder Project Components Report</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 40px auto; padding: 20px; background-color: #f4f7f6; }
+        .container { background-color: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; text-align: center; }
+        h2 { color: #2980b9; margin-top: 30px; border-left: 5px solid #3498db; padding-left: 15px; background: #ecf0f1; padding-top: 10px; padding-bottom: 10px; }
+        h3 { color: #d35400; margin-top: 25px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background-color: #fff; }
+        th, td { text-align: left; padding: 12px; border: 1px solid #ddd; }
+        th { background-color: #3498db; color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .purpose-text { font-style: italic; color: #7f8c8d; margin-bottom: 15px; }
+        .group-info { text-align: center; margin-bottom: 30px; font-weight: bold; font-size: 1.1em; }
+        @media print {
+            body { background-color: #fff; margin: 0; padding: 0; }
+            .container { box-shadow: none; border: none; width: 100%; max-width: 100%; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>StudReminder: Full Project Components Report</h1>
+        <div class="group-info">
+            Project: Student Reminder Application<br>
+            Activity Type: Group Activity Submission
+        </div>
+
+        <p class="purpose-text">This document provides a comprehensive list of all classes, variables, constants, and methods used in the StudReminder project, detailing their specific roles and functionality.</p>
+
+        <!-- 1. DATABASE MANAGEMENT -->
+        <h2>1. Database Management</h2>
+        <div class="purpose-text">Handles all persistent storage using SQLite.</div>
+
+        <h3>DatabaseHelper.java</h3>
+        <table>
+            <tr><th>Component</th><th>Name</th><th>Purpose</th></tr>
+            <tr><td>Constant</td><td>DATABASE_NAME</td><td>The name of the SQLite file: "StudentReminder.db".</td></tr>
+            <tr><td>Constant</td><td>TABLE_SCHEDULE, TABLE_SUBJECT, TABLE_REVIEW, TABLE_TODO</td><td>Identifiers for the four main data tables.</td></tr>
+            <tr><td>Method</td><td>onCreate()</td><td>Initializes the database by creating all required tables and columns.</td></tr>
+            <tr><td>Method</td><td>onUpgrade()</td><td>Handles database schema changes when the version number increases.</td></tr>
+            <tr><td>Method</td><td>insertSubject(), insertSchedule(), insertReview(), insertTodo()</td><td>Methods to add new records to their respective tables.</td></tr>
+            <tr><td>Method</td><td>getAllSubjects(), getSchedulesByDay(), getReviewsBySubject()</td><td>Retrieve specific datasets from the database for display.</td></tr>
+            <tr><td>Method</td><td>updateTodoCompleted()</td><td>Specifically updates the boolean status of a task item.</td></tr>
+            <tr><td>Method</td><td>deleteSubject(), deleteSchedule(), deleteReview(), deleteTodo()</td><td>Methods to remove records based on their ID.</td></tr>
+        </table>
+
+        <!-- 2. UI COMPONENTS (ACTIVITIES) -->
+        <h2>2. User Interface Controllers (Activities)</h2>
+        <div class="purpose-text">Activities manage the lifecycle of the screens and handle user interaction.</div>
+
+        <h3>AddReviewActivity.java</h3>
+        <table>
+            <tr><th>Variable/Method</th><th>Type</th><th>Purpose</th></tr>
+            <tr><td>etSubject, etTopic, etDate, etTime</td><td>TextInputEditText</td><td>Input fields for capturing study session details.</td></tr>
+            <tr><td>dropdownReminder</td><td>MaterialAutoCompleteTextView</td><td>Allows selection of a reminder interval (e.g., 1 day before).</td></tr>
+            <tr><td>saveOrUpdateReview()</td><td>Method</td><td>Processes the form, validates inputs, and saves to the database.</td></tr>
+            <tr><td>showDatePicker(), showTimePicker()</td><td>Method</td><td>Triggers Android system dialogs for date and time selection.</td></tr>
+        </table>
+
+        <h3>ReviewDetailsActivity.java</h3>
+        <table>
+            <tr><th>Variable/Method</th><th>Type</th><th>Purpose</th></tr>
+            <tr><td>recyclerTodos</td><td>RecyclerView</td><td>Displays the list of sub-tasks (Todos) for a review session.</td></tr>
+            <tr><td>todoAdapter</td><td>TodoAdapter</td><td>Manages the connection between the Todo data and the list UI.</td></tr>
+            <tr><td>showAddTodoDialog()</td><td>Method</td><td>Opens a popup to enter a new task description.</td></tr>
+        </table>
+
+        <h3>ScheduleActivity.java</h3>
+        <table>
+            <tr><th>Variable/Method</th><th>Type</th><th>Purpose</th></tr>
+            <tr><td>tvMon, tvTue, tvWed, etc.</td><td>TextView</td><td>Buttons to filter schedules by the day of the week.</td></tr>
+            <tr><td>selectDay()</td><td>Method</td><td>Handles the logic of switching between different days and reloading data.</td></tr>
+            <tr><td>loadSchedules()</td><td>Method</td><td>Fetches schedules for a specific day from the DatabaseHelper.</td></tr>
+        </table>
+
+        <!-- 3. DATA MODELS -->
+        <h2>3. Data Models (POJOs)</h2>
+        <div class="purpose-text">Plain Old Java Objects used to structure data in the app's memory.</div>
+
+        <h3>Subject, Schedule, Review, Todo</h3>
+        <table>
+            <tr><th>Class</th><th>Key Variables</th><th>Purpose</th></tr>
+            <tr><td>Subject</td><td>id, name, teacher, room, color</td><td>Defines a course/subject added by the student.</td></tr>
+            <tr><td>Schedule</td><td>id, subject, day, startTime, endTime, room</td><td>Represents a specific occurrence of a class.</td></tr>
+            <tr><td>Review</td><td>id, topic, date, time, reminder</td><td>Represents a planned study session.</td></tr>
+            <tr><td>Todo</td><td>id, reviewId, task, completed</td><td>A single task or checklist item inside a Review.</td></tr>
+        </table>
+
+        <!-- 4. ADAPTERS -->
+        <h2>4. Adapters (List Logic)</h2>
+        <div class="purpose-text">Adapters act as the bridge between data models and RecyclerView UI components.</div>
+
+        <h3>SubjectAdapter, ScheduleAdapter, ReviewAdapter, TodoAdapter</h3>
+        <table>
+            <tr><th>Method</th><th>Purpose</th></tr>
+            <tr><td>onCreateViewHolder()</td><td>Inflates the specific XML layout for a single item in the list.</td></tr>
+            <tr><td>onBindViewHolder()</td><td>Populates the text views and colors of a list item using the data model.</td></tr>
+            <tr><td>updateTaskStyle() (Todo)</td><td>Applies a strikethrough effect to text when a task is marked completed.</td></tr>
+        </table>
+    </div>
+</body>
+</html>

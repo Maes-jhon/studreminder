@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:src="@drawable/ic_empty_schedule"
+        android:contentDescription="No Schedule"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="No schedules found"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/brand_dark_brown"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="You don't have any class for this day."
+        android:textSize="15sp"
+        android:textColor="@color/brand_dark_brown"
+        android:alpha="0.6"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnEmptyAdd"
+        style="@style/Widget.Studreminder.BrutalButton"
+        android:layout_width="200dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="28dp"
+        android:text="+  Schedule"/>
+
+</LinearLayout>

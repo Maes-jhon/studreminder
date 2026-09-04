@@ -1,0 +1,5 @@
+- [x] Update `DatabaseHelper.java` (Bump to V16, add `reminder_offset` to `schedule` table)
+- [x] Update `activity_add_schedule.xml` (Add Reminder dropdown UI)
+- [x] Update `AddScheduleActivity.java` (Implement double alarm scheduling logic)
+- [x] Refine `ReminderReceiver.java` (Support on-time and early class alerts)
+- [x] Verify build and double-notification functionality

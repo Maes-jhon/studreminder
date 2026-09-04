@@ -1,0 +1,42 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Hard Shadow for Logo Background -->
+    <path
+        android:fillColor="#1A1B1E"
+        android:pathData="M24,14 L84,14 C89.5,14 94,18.5 94,24 L94,84 C94,89.5 89.5,94 84,94 L24,94 C18.5,94 14,89.5 14,84 L14,24 C14,18.5 18.5,14 24,14 Z" />
+
+    <!-- Main Logo Background Box -->
+    <path
+        android:fillColor="#FFD43B"
+        android:pathData="M20,10 L80,10 C85.5,10 90,14.5 90,20 L90,80 C90,85.5 85.5,90 80,90 L20,90 C14.5,90 10,85.5 10,80 L10,20 C10,14.5 14.5,10 20,10 Z" />
+    <!-- Black Border for Background -->
+    <path
+        android:strokeColor="#1A1B1E"
+        android:strokeWidth="2.5"
+        android:pathData="M20,10 L80,10 C85.5,10 90,14.5 90,20 L90,80 C90,85.5 85.5,90 80,90 L20,90 C14.5,90 10,85.5 10,80 L10,20 C10,14.5 14.5,10 20,10 Z" />
+
+    <!-- Document Icon -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#1A1B1E"
+        android:strokeWidth="2"
+        android:pathData="M35,30 H55 L65,40 V70 C65,72.8 62.8,75 60,75 H35 C32.2,75 30,72.8 30,70 V35 C30,32.2 32.2,30 35,30 Z" />
+
+    <!-- Lines in Document -->
+    <path
+        android:strokeColor="#1A1B1E"
+        android:strokeWidth="2"
+        android:pathData="M38,45 H55 M38,55 H55 M38,65 H48" />
+
+    <!-- Checkmark -->
+    <path
+        android:strokeColor="#40C057"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M52,62 L57,67 L67,57" />
+</vector>

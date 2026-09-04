@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StudReminder Final Project Report</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.5; color: #333; margin: 40px; }
+        h1 { text-align: center; color: #2c3e50; border-bottom: 2px solid #2c3e50; padding-bottom: 10px; }
+        h2 { background-color: #f8f9fa; color: #2980b9; padding: 10px; border-left: 5px solid #2980b9; margin-top: 30px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        th, td { border: 1px solid #bdc3c7; padding: 10px; text-align: left; vertical-align: top; }
+        th { background-color: #34495e; color: white; text-transform: uppercase; letter-spacing: 1px; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        b { color: #2c3e50; }
+        .footer { text-align: center; margin-top: 50px; font-size: 12px; color: #7f8c8d; border-top: 1px solid #eee; padding-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <h1>PROJECT COMPONENTS REPORT: STUDREMINDER</h1>
+    <p style="text-align: center;"><b>Course Activity: Full System Documentation for Group Submission</b></p>
+
+    <!-- DATABASE SECTION -->
+    <h2>1. DATABASE MANAGEMENT (DatabaseHelper.java)</h2>
+    <p>This class manages the SQLite database, acting as the foundation for all data persistence in the app.</p>
+    <table>
+        <tr>
+            <th>Category</th>
+            <th>Name</th>
+            <th>Purpose / Explanation</th>
+        </tr>
+        <tr>
+            <td><b>Constants</b></td>
+            <td>DATABASE_NAME, DATABASE_VERSION</td>
+            <td>Defines the physical file name ("StudentReminder.db") and the version for schema migration.</td>
+        </tr>
+        <tr>
+            <td><b>Constants</b></td>
+            <td>TABLE_SCHEDULE, TABLE_SUBJECT, TABLE_REVIEW, TABLE_TODO</td>
+            <td>Names of the internal storage tables for schedules, courses, study sessions, and tasks.</td>
+        </tr>
+        <tr>
+            <td><b>Constants</b></td>
+            <td>COL_ID, COL_SUBJECT, COL_DAY, COL_START, COL_END, COL_ROOM</td>
+            <td>Names of the data columns used to store specific class information.</td>
+        </tr>
+        <tr>
+            <td><b>Methods</b></td>
+            <td>onCreate()</td>
+            <td>Initializes the app by executing SQL strings to create all four data tables.</td>
+        </tr>
+        <tr>
+            <td><b>Methods</b></td>
+            <td>insertSubject(), insertSchedule(), insertReview(), insertTodo()</td>
+            <td>Validates and writes new records into the database.</td>
+        </tr>
+        <tr>
+            <td><b>Methods</b></td>
+            <td>getAllSubjects(), getSchedulesByDay(), getTodosByReviewId()</td>
+            <td>Fetches filtered lists of data from the database to display in the UI.</td>
+        </tr>
+        <tr>
+            <td><b>Methods</b></td>
+            <td>updateTodoCompleted(), updateReview(), updateSubject()</td>
+            <td>Modifies existing records in the database when a user edits an item or checks a task.</td>
+        </tr>
+        <tr>
+            <td><b>Methods</b></td>
+            <td>deleteSubject(), deleteSchedule(), deleteReview(), deleteTodo()</td>
+            <td>Permanently removes data based on its unique ID.</td>
+        </tr>
+    </table>
+
+    <!-- ACTIVITIES SECTION -->
+    <h2>2. USER INTERFACE CONTROLLERS (Activities)</h2>
+    <p>These classes manage the different screens of the application and handle all user interactions.</p>
+    <table>
+        <tr>
+            <th>Class Name</th>
+            <th>Key Variables / Declarations</th>
+            <th>Purpose in Project</th>
+        </tr>
+        <tr>
+            <td><b>MainActivity</b></td>
+            <td>navHome, navSubjects, navCalendar, navSchedule</td>
+            <td>The main entry point providing navigation buttons to all features.</td>
+        </tr>
+        <tr>
+            <td><b>AddReviewActivity</b></td>
+            <td>etSubject, etTopic, etDate, dropdownReminder, editMode</td>
+            <td>Allows users to create or edit study sessions. Handles form validation and date/time selection dialogs.</td>
+        </tr>
+        <tr>
+            <td><b>AddScheduleActivity</b></td>
+            <td>etSubject, etStartTime, etEndTime, etRoom</td>
+            <td>Facilitates the input of recurring class schedules into the timetable.</td>
+        </tr>
+        <tr>
+            <td><b>SubjectsActivity</b></td>
+            <td>recyclerSubjects, adapter, subjectList</td>
+            <td>Displays a grid or list of all academic subjects added by the student.</td>
+        </tr>
+        <tr>
+            <td><b>ReviewDetailsActivity</b></td>
+            <td>recyclerTodos, todoAdapter, tabLayout, btnAdd</td>
+            <td>Shows details for a study session and manages its internal "To-Do" checklist.</td>
+        </tr>
+        <tr>
+            <td><b>ScheduleActivity</b></td>
+            <td>tvMon, tvTue, tvWed (Day tabs), recyclerSchedule</td>
+            <td>A calendar-style view where students can see their classes filtered by day.</td>
+        </tr>
+    </table>
+
+    <!-- DATA MODELS SECTION -->
+    <h2>3. DATA MODELS (POJO Blueprints)</h2>
+    <p>These simple classes define the structure of the data objects used throughout the application code.</p>
+    <table>
+        <tr>
+            <th>Class</th>
+            <th>Variables Declared</th>
+            <th>Purpose / Usage</th>
+        </tr>
+        <tr>
+            <td><b>Subject</b></td>
+            <td>id, subject, teacher, room, color</td>
+            <td>Represents a course with its instructor and classroom location.</td>
+        </tr>
+        <tr>
+            <td><b>Schedule</b></td>
+            <td>id, subject, day, startTime, endTime, room</td>
+            <td>Represents a specific time slot for a class in the weekly timetable.</td>
+        </tr>
+        <tr>
+            <td><b>Review</b></td>
+            <td>id, subject, topic, date, time, reminder</td>
+            <td>Represents a planned study or review session for an exam.</td>
+        </tr>
+        <tr>
+            <td><b>Todo</b></td>
+            <td>id, reviewId, task, completed</td>
+            <td>Represents a single actionable item or goal within a review session.</td>
+        </tr>
+    </table>
+
+    <!-- ADAPTERS SECTION -->
+    <h2>4. UI ADAPTERS (Logic Bridges)</h2>
+    <p>Adapters bridge the gap between the raw data and the RecyclerView components that display the lists.</p>
+    <table>
+        <tr>
+            <th>Adapter Name</th>
+            <th>Methods Used</th>
+            <th>Purpose / Logic</th>
+        </tr>
+        <tr>
+            <td><b>SubjectAdapter</b></td>
+            <td>onCreateViewHolder(), onBindViewHolder()</td>
+            <td>Maps subject data to the visual cards in the Subjects screen.</td>
+        </tr>
+        <tr>
+            <td><b>TodoAdapter</b></td>
+            <td>updateTaskStyle(), onBindViewHolder()</td>
+            <td>Handles the checklist logic, including adding strikethroughs to completed tasks.</td>
+        </tr>
+        <tr>
+            <td><b>ScheduleAdapter</b></td>
+            <td>onBindViewHolder(), getItemCount()</td>
+            <td>Formats the class time and room for the daily schedule list.</td>
+        </tr>
+    </table>
+
+    <div class="footer">
+        StudReminder Application Documentation &copy; 2026<br>
+        <i>Generated for Group Activity Submission</i>
+    </div>
+
+</body>
+</html>

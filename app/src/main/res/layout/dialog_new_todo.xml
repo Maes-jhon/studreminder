@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@color/brand_ivory">
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Studreminder.BrutalInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="To-do Name"
+        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/true_black"
+        app:boxStrokeWidth="2dp"
+        app:boxStrokeWidthFocused="3dp"
+        android:textColorHint="@color/brand_dark_brown"
+        app:hintTextColor="@color/brand_dark_brown">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etTodoTask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/brand_dark_brown" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Studreminder.BrutalInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="Subto-dos"
+        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/true_black"
+        app:boxStrokeWidth="2dp"
+        app:boxStrokeWidthFocused="3dp"
+        android:textColorHint="@color/brand_dark_brown"
+        app:hintTextColor="@color/brand_dark_brown">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etTodoSub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/brand_dark_brown" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Studreminder.BrutalInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="Description"
+        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/true_black"
+        app:boxStrokeWidth="2dp"
+        app:boxStrokeWidthFocused="3dp"
+        android:textColorHint="@color/brand_dark_brown"
+        app:hintTextColor="@color/brand_dark_brown">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etTodoDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minLines="3"
+            android:gravity="top"
+            android:textColor="@color/brand_dark_brown" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Studreminder.BrutalInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="Deadline"
+        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/true_black"
+        app:boxStrokeWidth="2dp"
+        app:boxStrokeWidthFocused="3dp"
+        android:textColorHint="@color/brand_dark_brown"
+        app:hintTextColor="@color/brand_dark_brown">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etTodoDeadline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:clickable="true"
+            android:textColor="@color/brand_dark_brown" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

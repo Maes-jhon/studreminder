@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Neubrutalism Palette -->
+    <color name="brutal_black">#1A1B1E</color>
+    <color name="true_black">#000000</color>
+    <color name="brutal_white">#F8F9FA</color>
+    <color name="brutal_yellow">#FFD43B</color>
+    <color name="brutal_blue">#3B5BDB</color>
+    <color name="brutal_green">#40C057</color>
+    <color name="brutal_pink">#FF8E9E</color>
+    <color name="brutal_orange">#FF922B</color>
+    <color name="brutal_cyan">#15AABF</color>
+    <color name="brutal_purple">#BE4BDB</color>
+    <color name="brutal_bg_soft">#EDF2FF</color>
+    <color name="brutal_gray">#8A7B6D</color>
+
+    <!-- So Matcha Palette -->
+    <color name="brand_ivory">#FBFCEE</color>
+    <color name="brand_vanilla">#F6E6A5</color>
+    <color name="brand_celtic_blue">#3971B8</color>
+    <color name="brand_tea_green">#C8D69B</color>
+    <color name="brand_dark_brown">#343B1B</color>
+
+    <!-- OUI Palette Accents -->
+    <color name="accent_red">#CC1400</color>
+    <color name="accent_orange">#FFAD33</color>
+    <color name="accent_yellow">#FFEC89</color>
+    <color name="accent_green">#6BAA75</color>
+    <color name="accent_purple_soft">#C28CAE</color>
+    <color name="accent_purple_bold">#967CC7</color>
+    <color name="accent_blue_mid">#4C57A9</color>
+    <color name="accent_blue_light">#6698CC</color>
+
+    <!-- Component Specific -->
+    <color name="brutal_field_border">#000000</color>
+    <color name="brutal_field_bg">#FFFFFF</color>
+</resources>

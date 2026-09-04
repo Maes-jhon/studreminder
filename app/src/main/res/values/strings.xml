@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Remindly</string>
+    <string name="logo_description">Remindly Logo</string>
+    <string name="slogan">Plan. Study. Succeed.</string>
+    <string name="welcome_back">Welcome back</string>
+    <string name="journey_subtitle">Your journey is finally here</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="login_button">Login</string>
+    <string name="no_account">Don\'t have an account? Register</string>
+    <string name="create_account_title">Create your account</string>
+    <string name="start_planning">Start planning smarter today</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="signup_button">Sign up</string>
+    <string name="already_have_account">Already have an account? Login</string>
+    <string name="onboarding_text">Every successful student starts with a plan. Stay on track, one reminder at a time.</string>
+    <string name="create_new_account">Create a new account</string>
+    <string name="accessibility_service_description">Required by Student Reminder to lock distracting apps during active study sessions.</string>
+
+    <!-- Add Review Layout Strings -->
+    <string name="btn_back_description">Back</string>
+    <string name="title_add_review">Add Review</string>
+    <string name="hint_subject">Subject</string>
+    <string name="hint_topic">Topic</string>
+    <string name="hint_review_date">Review Date</string>
+    <string name="hint_review_time">Review Time</string>
+    <string name="hint_reminder">Reminder</string>
+    <string name="btn_save_review">Save Review</string>
+
+    <!-- Lock Screen Strings -->
+    <string name="focus_mode_notification_title">Focus Mode Active</string>
+    <string name="focus_mode_notification_start">Study session is starting.</string>
+    <string name="focus_mode_break_title">Break Time!</string>
+    <string name="focus_mode_break_content">Enjoy your 5-minute break.</string>
+    <string name="focus_mode_back_title">Back to Study!</string>
+    <string name="focus_mode_back_content">Focus Mode is active.</string>
+    <string name="toast_incorrect_pin">Incorrect PIN</string>
+    <string name="toast_pin_correct">PIN Correct!</string>
+    <string name="toast_focus_disabled">Focus Mode disabled.</string>
+    <string name="dialog_session_interrupted">Session Interrupted</string>
+    <string name="dialog_reschedule_msg">Would you like to reschedule this session for 30 minutes later?</string>
+    <string name="btn_start_mission">Start Study Mission</string>
+    <string name="btn_end_mission">End Focus Session</string>
+</resources>

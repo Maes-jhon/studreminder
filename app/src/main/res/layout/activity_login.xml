@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/brand_ivory"
+    android:padding="32dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="@string/welcome_back"
+        android:textColor="@color/brand_dark_brown"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:text="@string/journey_subtitle"
+        android:textColor="@color/brand_dark_brown"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:alpha="0.6" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutLoginUsername"
+        style="@style/Widget.Studreminder.BrutalInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:hint="@string/username_hint"
+        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/true_black"
+        app:boxStrokeWidth="2dp"
+        app:boxStrokeWidthFocused="3dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etLoginUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="@color/brand_dark_brown"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutLoginPassword"
+        style="@style/Widget.Studreminder.BrutalInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:hint="@string/password_hint"
+        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/true_black"
+        app:boxStrokeWidth="2dp"
+        app:boxStrokeWidthFocused="3dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etLoginPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textColor="@color/brand_dark_brown"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginBottom="32dp"
+        android:text="@string/forgot_password"
+        android:textColor="@color/brand_celtic_blue"
+        android:textStyle="bold" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogin"
+        style="@style/Widget.Studreminder.BrutalButton"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:text="@string/login_button" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New here? "
+            android:textColor="@color/brand_dark_brown"
+            android:textStyle="bold"
+            android:alpha="0.7" />
+        <TextView
+            android:id="@+id/tvGoToRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Account"
+            android:textColor="@color/brand_celtic_blue"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/brand_ivory"
+    android:clipToPadding="false"
+    android:clipChildren="false">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav">
+
+        <!-- TITLE -->
+        <TextView
+            android:id="@+id/tvScheduleTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Class Schedule"
+            android:textColor="@color/brand_dark_brown"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+
+        <!-- DATE -->
+        <TextView
+            android:id="@+id/tvTodayDate"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:layout_marginTop="12dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:gravity="center"
+            android:text="MON • AUG 04"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/brand_dark_brown"
+            android:background="@drawable/bg_date_pill"
+            app:layout_constraintTop_toBottomOf="@id/tvScheduleTitle"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+
+        <!-- ADD BUTTON -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnAdd"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="Add Schedule"
+            android:src="@drawable/ic_add"
+            app:backgroundTint="@color/brand_vanilla"
+            app:tint="@color/brand_dark_brown"
+            app:elevation="4dp"
+            app:rippleColor="@color/accent_yellow"
+            app:borderWidth="2dp"
+            app:maxImageSize="26dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- DAY SELECTOR -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/daySelectorCard"
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/tvTodayDate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:id="@+id/daySelector"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/tvSun"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Sun"
+                    android:textSize="12sp"
+                    android:textAllCaps="true"
+                    android:maxLines="1"
+                    android:layout_marginHorizontal="2dp"
+                    android:textStyle="bold"
+                    android:background="@drawable/bg_day_unselected"/>
+
+                <TextView
+                    android:id="@+id/tvMon"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Mon"
+                    android:textSize="12sp"
+                    android:textAllCaps="true"
+                    android:maxLines="1"
+                    android:layout_marginHorizontal="2dp"
+                    android:textStyle="bold"
+                    android:background="@drawable/bg_day_unselected"/>
+
+                <TextView
+                    android:id="@+id/tvTue"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Tue"
+                    android:textSize="12sp"
+                    android:textAllCaps="true"
+                    android:maxLines="1"
+                    android:layout_marginHorizontal="2dp"
+                    android:textStyle="bold"
+                    android:background="@drawable/bg_day_unselected"/>
+
+                <TextView
+                    android:id="@+id/tvWed"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Wed"
+                    android:textSize="12sp"
+                    android:textAllCaps="true"
+                    android:maxLines="1"
+                    android:layout_marginHorizontal="2dp"
+                    android:textStyle="bold"
+                    android:background="@drawable/bg_day_unselected"/>
+
+                <TextView
+                    android:id="@+id/tvThu"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Thu"
+                    android:textSize="12sp"
+                    android:textAllCaps="true"
+                    android:maxLines="1"
+                    android:layout_marginHorizontal="2dp"
+                    android:textStyle="bold"
+                    android:background="@drawable/bg_day_unselected"/>
+
+                <TextView
+                    android:id="@+id/tvFri"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Fri"
+                    android:textSize="12sp"
+                    android:textAllCaps="true"
+                    android:maxLines="1"
+                    android:layout_marginHorizontal="2dp"
+                    android:textStyle="bold"
+                    android:background="@drawable/bg_day_unselected"/>
+
+                <TextView
+                    android:id="@+id/tvSat"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Sat"
+                    android:textSize="12sp"
+                    android:textAllCaps="true"
+                    android:maxLines="1"
+                    android:layout_marginHorizontal="2dp"
+                    android:textStyle="bold"
+                    android:background="@drawable/bg_day_unselected"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <!-- EMPTY STATE -->
+        <include
+            android:id="@+id/emptyState"
+            layout="@layout/empty_schedule"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/daySelectorCard"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        <!-- SCHEDULE LIST -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerSchedule"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:clipToPadding="false"
+            android:paddingBottom="20dp"
+            app:layout_constraintTop_toBottomOf="@id/daySelectorCard"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!-- BOTTOM NAV -->
+    <include
+        android:id="@+id/bottomNav"
+        layout="@layout/bottom_navigation"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/brand_ivory"
+    android:clipToPadding="false"
+    android:clipChildren="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Header with Back Button and Title -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_round_button"
+                android:contentDescription="Back"
+                android:padding="12dp"
+                android:src="@android:drawable/ic_media_previous"
+                app:tint="#202735"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Add Schedule"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="@color/brand_dark_brown"/>
+
+        </LinearLayout>
+
+        <!-- Form Card Container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_brutal_card"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- Subject -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Studreminder.BrutalInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Subject"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/true_black"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeWidthFocused="3dp"
+                android:textColorHint="@color/brand_dark_brown"
+                app:hintTextColor="@color/brand_dark_brown">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etSubject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapWords"
+                    android:textColor="@color/brand_dark_brown" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Schedule Date -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Studreminder.BrutalInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Schedule Date"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/true_black"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeWidthFocused="3dp"
+                android:textColorHint="@color/brand_dark_brown"
+                app:hintTextColor="@color/brand_dark_brown">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:textColor="@color/brand_dark_brown" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Start Time -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Studreminder.BrutalInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Start Time"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/true_black"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeWidthFocused="3dp"
+                android:textColorHint="@color/brand_dark_brown"
+                app:hintTextColor="@color/brand_dark_brown">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etStartTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:textColor="@color/brand_dark_brown" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- End Time -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Studreminder.BrutalInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="End Time"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/true_black"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeWidthFocused="3dp"
+                android:textColorHint="@color/brand_dark_brown"
+                app:hintTextColor="@color/brand_dark_brown">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEndTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:textColor="@color/brand_dark_brown" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Room -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Studreminder.BrutalInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Room"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/true_black"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeWidthFocused="3dp"
+                android:textColorHint="@color/brand_dark_brown"
+                app:hintTextColor="@color/brand_dark_brown">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etRoom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/brand_dark_brown" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Reminder Offset -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Studreminder.BrutalInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Reminder"
+                app:endIconMode="dropdown_menu"
+                app:endIconTint="@color/brand_dark_brown"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/true_black"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeWidthFocused="3dp"
+                android:textColorHint="@color/brand_dark_brown"
+                app:hintTextColor="@color/brand_dark_brown">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/dropdownReminder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/brand_dark_brown" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Save Button (Standard Button) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSave"
+                style="@style/Widget.Studreminder.BrutalButton"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="24dp"
+                android:text="Save Schedule"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

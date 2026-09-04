@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StudReminder Project Components Report</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: 40px auto; padding: 20px; background-color: #f0f2f5; }
+        .container { background-color: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-top: 8px solid #2c3e50; }
+        h1 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 15px; text-align: center; margin-bottom: 30px; }
+        h2 { color: #2980b9; margin-top: 40px; border-left: 6px solid #2980b9; padding-left: 15px; background: #f8fbff; padding-top: 10px; padding-bottom: 10px; }
+        h3 { color: #e67e22; margin-top: 25px; font-size: 1.3em; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background-color: #fff; table-layout: fixed; }
+        th, td { text-align: left; padding: 14px; border: 1px solid #dfe6e9; word-wrap: break-word; }
+        th { background-color: #34495e; color: white; text-transform: uppercase; font-size: 0.9em; letter-spacing: 0.5px; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        tr:hover { background-color: #f1f4f6; }
+        .component-name { font-weight: bold; color: #2c3e50; }
+        .type-tag { font-family: 'Courier New', Courier, monospace; font-size: 0.9em; background: #eef2f7; padding: 2px 6px; border-radius: 4px; }
+        .purpose-text { font-style: italic; color: #636e72; }
+        .group-header { text-align: center; margin-bottom: 40px; border: 1px dashed #b2bec3; padding: 20px; border-radius: 8px; }
+        @media print {
+            body { background-color: #fff; margin: 0; padding: 0; }
+            .container { box-shadow: none; border: none; width: 100%; max-width: 100%; padding: 0; }
+            h2 { background: none; border-left: 10px solid #2980b9; }
+            th { background-color: #000 !important; color: #fff !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="group-header">
+            <h1>PROJECT COMPONENTS REPORT: STUDREMINDER</h1>
+            <p><strong>Activity:</strong> Group Project Documentation<br>
+            <strong>Subject:</strong> Software Development / Mobile App Development</p>
+        </div>
+
+        <!-- 1. DATABASE & STORAGE -->
+        <h2>1. Database Management (The Storage Engine)</h2>
+        <p class="purpose-text">This section covers the core database infrastructure used to store student data permanently.</p>
+
+        <h3>DatabaseHelper.java</h3>
+        <table>
+            <colgroup>
+                <col style="width: 20%">
+                <col style="width: 30%">
+                <col style="width: 50%">
+            </colgroup>
+            <tr><th>Component Type</th><th>Name / Identifier</th><th>Purpose in Project</th></tr>
+            <tr><td><span class="type-tag">Constant</span></td><td>DATABASE_NAME</td><td>Defines the physical database filename: <b>"StudentReminder.db"</b>.</td></tr>
+            <tr><td><span class="type-tag">Constant</span></td><td>TABLE_SCHEDULE, TABLE_SUBJECT, TABLE_REVIEW, TABLE_TODO</td><td>Unique names for the tables used to organize different data entities.</td></tr>
+            <tr><td><span class="type-tag">Constant</span></td><td>COL_ID, COL_SUBJECT, COL_DAY, etc.</td><td>Standardized column names for the SQL tables to ensure data consistency.</td></tr>
+            <tr><td><span class="type-tag">Method</span></td><td>onCreate()</td><td>Automatically runs when the app starts for the first time to build the table structure.</td></tr>
+            <tr><td><span class="type-tag">Method</span></td><td>insertSubject() / insertReview()</td><td>Takes validated data from the UI and writes a new row into the database.</td></tr>
+            <tr><td><span class="type-tag">Method</span></td><td>getAllSubjects() / getSchedulesByDay()</td><td>Queries the database to retrieve lists of information for the student to view.</td></tr>
+            <tr><td><span class="type-tag">Method</span></td><td>updateTodoCompleted()</td><td>Handles the logic for marking a checklist task as "Done" in the database.</td></tr>
+            <tr><td><span class="type-tag">Method</span></td><td>deleteReview() / deleteSchedule()</td><td>Allows the user to remove specific records by their Unique ID.</td></tr>
+        </table>
+
+        <!-- 2. UI CONTROLLERS -->
+        <h2>2. User Interface Controllers (Activities)</h2>
+        <p class="purpose-text">These classes manage the screens, inputs, and the lifecycle of each application view.</p>
+
+        <h3>AddReviewActivity.java</h3>
+        <table>
+            <colgroup>
+                <col style="width: 30%">
+                <col style="width: 70%">
+            </colgroup>
+            <tr><th>Variable / Method</th><th>Purpose / Description</th></tr>
+            <tr><td><span class="component-name">etSubject, etTopic, etDate, etTime</span></td><td>Input fields used by the student to enter specific study session details.</td></tr>
+            <tr><td><span class="component-name">dropdownReminder</span></td><td>A dropdown menu for selecting when to be notified (e.g., 10 minutes before).</td></tr>
+            <tr><td><span class="component-name">editMode</span></td><td>A boolean flag to determine if the activity is adding a new review or editing an old one.</td></tr>
+            <tr><td><span class="component-name">saveOrUpdateReview()</span></td><td>Validates that inputs are not empty and calls the DatabaseHelper to save data.</td></tr>
+            <tr><td><span class="component-name">showDatePicker() / showTimePicker()</span></td><td>Triggers the Android system pop-ups for date and time selection.</td></tr>
+        </table>
+
+        <h3>ReviewDetailsActivity.java</h3>
+        <table>
+            <colgroup>
+                <col style="width: 30%">
+                <col style="width: 70%">
+            </colgroup>
+            <tr><th>Variable / Method</th><th>Purpose / Description</th></tr>
+            <tr><td><span class="component-name">recyclerTodos</span></td><td>The vertical list container that displays the checklist for a review session.</td></tr>
+            <tr><td><span class="component-name">todoAdapter</span></td><td>The bridge between the list of tasks and the UI layout.</td></tr>
+            <tr><td><span class="component-name">showAddTodoDialog()</span></td><td>Opens a pop-up window where the student can type a new task for the review.</td></tr>
+            <tr><td><span class="component-name">loadTodos()</span></td><td>Refreshes the task list by pulling data from the database for a specific review ID.</td></tr>
+        </table>
+
+        <!-- 3. DATA MODELS -->
+        <h2>3. Data Models (The Blueprints)</h2>
+        <p class="purpose-text">POJO (Plain Old Java Objects) used to structure information within the app's code.</p>
+
+        <h3>Subject, Schedule, Review, and Todo Classes</h3>
+        <table>
+            <colgroup>
+                <col style="width: 20%">
+                <col style="width: 30%">
+                <col style="width: 50%">
+            </colgroup>
+            <tr><th>Class Name</th><th>Key Variables</th><th>Functionality</th></tr>
+            <tr><td><b>Subject</b></td><td>id, subject, teacher, room, color</td><td>Stores data for a course, including the instructor and location.</td></tr>
+            <tr><td><b>Schedule</b></td><td>id, subject, day, startTime, endTime</td><td>Represents a specific occurrence of a class in the timetable.</td></tr>
+            <tr><td><b>Review</b></td><td>id, topic, date, time, reminder</td><td>Stores planning details for a study or exam review session.</td></tr>
+            <tr><td><b>Todo</b></td><td>id, reviewId, task, completed</td><td>Represents a single task item with a checkbox status.</td></tr>
+        </table>
+
+        <!-- 4. ADAPTERS -->
+        <h2>4. UI Adapters (Bridge Logic)</h2>
+        <p class="purpose-text">Adapters handle the complex logic of binding database objects to the visual list items.</p>
+
+        <h3>SubjectAdapter, ReviewAdapter, and TodoAdapter</h3>
+        <table>
+            <colgroup>
+                <col style="width: 30%">
+                <col style="width: 70%">
+            </colgroup>
+            <tr><th>Method Name</th><th>Role in Application</th></tr>
+            <tr><td><span class="component-name">onCreateViewHolder()</span></td><td>Inflates the XML design for a single row or card in a list.</td></tr>
+            <tr><td><span class="component-name">onBindViewHolder()</span></td><td>The most active method; it sets text, colors, and click listeners for each list item.</td></tr>
+            <tr><td><span class="component-name">updateTaskStyle()</span></td><td>(TodoAdapter) Logic that changes the font to strikethrough when a task is finished.</td></tr>
+        </table>
+
+        <div style="text-align: center; margin-top: 50px; color: #95a5a6; font-size: 0.9em;">
+            StudReminder Application Documentation &bull; 2026 Group Activity Submission
+        </div>
+    </div>
+</body>
+</html>

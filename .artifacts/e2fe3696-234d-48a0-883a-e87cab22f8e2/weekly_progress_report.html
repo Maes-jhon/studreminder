@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StudReminder Weekly Progress Report</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #000; max-width: 900px; margin: 40px auto; padding: 20px; background-color: #fff; }
+        .container { background-color: #fff; padding: 40px; border: 1px solid #ccc; border-radius: 8px; }
+        h1 { color: #000; border-bottom: 2px solid #000; padding-bottom: 15px; text-align: center; font-weight: bold; }
+        h2 { color: #000; margin-top: 30px; border-left: 5px solid #000; padding-left: 15px; padding-top: 5px; padding-bottom: 5px; font-weight: bold; }
+        h3 { color: #000; margin-top: 25px; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { text-align: left; padding: 12px; border: 1px solid #000; }
+        th { background-color: transparent; color: #000; font-weight: bold; text-transform: uppercase; }
+        .status-box { border: 2px solid #000; padding: 20px; border-radius: 5px; margin-top: 20px; }
+        .percent { font-size: 2em; font-weight: bold; color: #000; }
+        .page-break { page-break-before: always; }
+        @media print {
+            body { margin: 0; padding: 0; }
+            .container { border: none; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>WEEKLY PROGRESS & STATUS REPORT: STUDREMINDER</h1>
+        <p style="text-align: center;"><b>Date: August 9, 2026</b></p>
+
+        <!-- 1. ACCOMPLISHMENTS -->
+        <h2>1. Accomplishments & Progress (August 1 – August 7)</h2>
+        <p>During the first week of August, the project focused on building the core infrastructure and foundational features of the StudReminder application.</p>
+        <table>
+            <tr>
+                <th>Feature Area</th>
+                <th>Task Completed</th>
+                <th>Result</th>
+            </tr>
+            <tr>
+                <td><b>Core Infrastructure</b></td>
+                <td>Database Schema Design & SQLite Implementation</td>
+                <td>Successfully created <code>DatabaseHelper</code> with tables for Subjects, Schedules, and Reviews.</td>
+            </tr>
+            <tr>
+                <td><b>Subject Management</b></td>
+                <td>CRUD Operations for Academic Subjects</td>
+                <td>Users can now add, view, edit, and delete their courses with custom color coding.</td>
+            </tr>
+            <tr>
+                <td><b>Timetable System</b></td>
+                <td>Daily Schedule Tracker</td>
+                <td>Implemented the <code>ScheduleActivity</code> allowing users to view classes filtered by the day of the week.</td>
+            </tr>
+            <tr>
+                <td><b>Review Framework</b></td>
+                <td>Study Session Planner</td>
+                <td>Developed the ability to link review sessions to specific subjects with date and time pickers.</td>
+            </tr>
+            <tr>
+                <td><b>Basic To-Do List</b></td>
+                <td>Task Checklist Integration</td>
+                <td>Added a basic "To-Do" system within reviews to track study goals.</td>
+            </tr>
+        </table>
+
+        <!-- 2. PLAN FOR AUGUST 9 -->
+        <h2 class="page-break">2. Plan for Completion (Until Sunday, August 9)</h2>
+        <p>The focus for the weekend of August 8-9 is to transform the app from a simple reminder into a comprehensive study hub by adding advanced resources.</p>
+
+        <h3>Group Task Assignments:</h3>
+        <table>
+            <tr>
+                <th>Assigned Role</th>
+                <th>Task Description</th>
+                <th>Contribution to Project</th>
+            </tr>
+            <tr>
+                <td><b>Lead Developer</b></td>
+                <td>Multi-Resource Integration (Notes, Links, Files)</td>
+                <td>Enables students to attach external PDFs, web links, and detailed text notes to their study sessions.</td>
+            </tr>
+            <tr>
+                <td><b>UI/UX Specialist</b></td>
+                <td>Tabbed Navigation Implementation</td>
+                <td>Organizes the complex Review Details screen into clean tabs (Tasks, Notes, Resources) for better usability.</td>
+            </tr>
+            <tr>
+                <td><b>Database Analyst</b></td>
+                <td>Extended Schema Migration</td>
+                <td>Updates the database to support new tables for <code>ReviewNote</code>, <code>ReviewLink</code>, and <code>ReviewFile</code>.</td>
+            </tr>
+        </table>
+
+        <!-- 3. PROJECT STATUS -->
+        <h2>3. Project Status & Rate</h2>
+        <div class="status-box">
+            <span class="percent">92% Complete</span>
+            <p><b>Explanation of Rate:</b></p>
+            <ul>
+                <li><b>Core Features (100%):</b> Subjects, Schedules, and Basic Reviews are fully functional and tested.</li>
+                <li><b>Resource Modules (90%):</b> The backend for Notes, Links, and Files is implemented; final UI polishing is underway.</li>
+                <li><b>Study Sets (85%):</b> Flashcard/Study Set logic is integrated into the database, with UI refinements remaining.</li>
+                <li><b>Final Polish (Pending):</b> User flow testing and bug fixing for the new multi-tab interface are the final steps.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

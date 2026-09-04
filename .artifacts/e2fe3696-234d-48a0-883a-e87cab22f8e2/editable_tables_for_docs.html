@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    table { width: 100%; border-collapse: collapse; margin-bottom: 30px; font-family: sans-serif; }
+    th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
+    h2 { font-family: sans-serif; color: #2c3e50; }
+</style>
+</head>
+<body>
+
+<h2>1. Activities (UI Controllers)</h2>
+<table>
+  <tr>
+    <th>Class Name</th>
+    <th>Variables / Constants</th>
+    <th>Method / Function</th>
+    <th>Purpose</th>
+  </tr>
+  <tr>
+    <td><b>AddReviewActivity</b></td>
+    <td>etSubject, etTopic, etDate, dropdownReminder, databaseHelper, editMode</td>
+    <td>saveOrUpdateReview(), showDatePicker(), setupReminderDropdown()</td>
+    <td>Handles the creation and editing of review sessions. It manages user input, date/time selection, and saves data to the database.</td>
+  </tr>
+  <tr>
+    <td><b>ReviewDetailsActivity</b></td>
+    <td>recyclerTodos, todoAdapter, todoList, reviewId</td>
+    <td>loadReviewDetails(), setupTabs(), showAddTodoDialog(), loadTodos()</td>
+    <td>Displays specific details of a review and manages the checklist (Todo) items associated with it.</td>
+  </tr>
+  <tr>
+    <td><b>ScheduleActivity</b></td>
+    <td>recyclerSchedule, scheduleAdapter, tvMon, tvTue, selectedDay</td>
+    <td>selectDay(), loadSchedules(), setupBottomNavigation()</td>
+    <td>The main dashboard for class schedules. Allows users to switch between days and see their timetable.</td>
+  </tr>
+  <tr>
+    <td><b>SubjectsActivity</b></td>
+    <td>recyclerSubjects, adapter, subjectList, databaseHelper</td>
+    <td>loadSubjects(), setupBottomNavigation()</td>
+    <td>Lists all academic subjects added by the user and provides navigation to subject-specific reviews.</td>
+  </tr>
+</table>
+
+<h2>2. Database Management</h2>
+<table>
+  <tr>
+    <th>Class Name</th>
+    <th>Constants (Storage Names)</th>
+    <th>Core Methods</th>
+    <th>Purpose</th>
+  </tr>
+  <tr>
+    <td><b>DatabaseHelper</b></td>
+    <td>DATABASE_NAME, TABLE_SUBJECT, TABLE_REVIEW, TABLE_TODO, COL_ID, COL_SUBJECT</td>
+    <td>onCreate(), insertSubject(), getAllSchedules(), updateTodoCompleted(), deleteReview()</td>
+    <td>Acts as the central data hub. It creates the physical storage tables and provides methods for Saving, Loading, Updating, and Deleting data.</td>
+  </tr>
+</table>
+
+<h2>3. Data Models (Blueprints)</h2>
+<table>
+  <tr>
+    <th>Class Name</th>
+    <th>Key Variables</th>
+    <th>Methods</th>
+    <th>Purpose</th>
+  </tr>
+  <tr>
+    <td><b>Subject</b></td>
+    <td>id, subject, teacher, room, color</td>
+    <td>getId(), getSubject(), getColor()</td>
+    <td>Defines the structure of a course/subject entity.</td>
+  </tr>
+  <tr>
+    <td><b>Review</b></td>
+    <td>id, subject, topic, date, time, reminder</td>
+    <td>getTopic(), getDate(), getReminder()</td>
+    <td>Defines the structure of a study session entity.</td>
+  </tr>
+  <tr>
+    <td><b>Todo</b></td>
+    <td>id, reviewId, task, completed</td>
+    <td>getTask(), isCompleted(), setCompleted()</td>
+    <td>Defines a single checklist task within a review.</td>
+  </tr>
+</table>
+
+<h2>4. UI Adapters (Bridge)</h2>
+<table>
+  <tr>
+    <th>Class Name</th>
+    <th>Main Variables</th>
+    <th>Core Methods</th>
+    <th>Purpose</th>
+  </tr>
+  <tr>
+    <td><b>SubjectAdapter / TodoAdapter</b></td>
+    <td>listData, viewHolder</td>
+    <td>onCreateViewHolder(), onBindViewHolder(), updateTaskStyle()</td>
+    <td>Binds the database objects to the visual list items on the screen. It handles the logic for how items look (like adding strikethroughs to completed tasks).</td>
+  </tr>
+</table>
+
+</body>
+</html>

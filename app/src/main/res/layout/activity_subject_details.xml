@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/brand_ivory"
+    android:padding="20dp">
+
+    <!-- BACK BUTTON -->
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_round_button"
+        android:contentDescription="Back"
+        android:padding="12dp"
+        android:src="@android:drawable/ic_media_previous"
+        app:tint="#202735"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!-- SHARE BUTTON -->
+    <ImageButton
+        android:id="@+id/btnShare"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_round_button"
+        android:contentDescription="Share"
+        android:padding="12dp"
+        android:src="@android:drawable/ic_menu_share"
+        app:tint="#202735"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!-- SUBJECT TITLE -->
+    <TextView
+        android:id="@+id/tvSubject"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Programming"
+        android:textColor="@color/brand_dark_brown"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/btnBack"
+        app:layout_constraintEnd_toStartOf="@id/btnShare"
+        app:layout_constraintStart_toEndOf="@id/btnBack"
+        app:layout_constraintTop_toTopOf="@id/btnBack"/>
+
+    <!-- MAIN CARD -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardSubject"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnBack">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- TEACHER LABEL -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Instructor"
+                android:textColor="@color/brand_dark_brown"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <!-- TEACHER VALUE -->
+            <TextView
+                android:id="@+id/tvTeacher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="20dp"
+                android:text="Mr. Santos"
+                android:textColor="@color/brand_dark_brown"
+                android:alpha="0.7"
+                android:textSize="15sp"/>
+
+            <!-- ROOM LABEL -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Room"
+                android:textColor="@color/brand_dark_brown"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <!-- ROOM VALUE -->
+            <TextView
+                android:id="@+id/tvRoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="24dp"
+                android:text="Lab 302"
+                android:textColor="@color/brand_dark_brown"
+                android:alpha="0.7"
+                android:textSize="15sp"/>
+
+            <!-- DIVIDER -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/brand_vanilla"/>
+
+            <!-- REVIEW TITLE -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Review Sessions"
+                android:textColor="@color/brand_dark_brown"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+            <!-- EMPTY STATE -->
+            <TextView
+                android:id="@+id/tvNoReviews"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="20dp"
+                android:text="No review sessions yet."
+                android:textColor="#8A919E"
+                android:textSize="15sp"
+                android:visibility="gone"/>
+
+            <!-- REVIEW LIST -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerReviews"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="12dp"
+                android:layout_weight="1"
+                android:clipToPadding="false"
+                android:paddingBottom="10dp"/>
+
+            <!-- START REVIEWING / LOCK DISTRACTIONS BUTTON -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnStartFocusSession"
+                style="@style/Widget.Studreminder.BrutalButton"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/btn_start_mission"/>
+
+            <!-- ADD REVIEW BUTTON -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddReview"
+                style="@style/Widget.Studreminder.BrutalButton"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="8dp"
+                android:text="+ Add Review"
+                app:rippleColor="@color/brand_ivory" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

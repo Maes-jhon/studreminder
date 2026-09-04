@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/brand_ivory"
+    android:padding="32dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="@string/create_account_title"
+        android:textColor="@color/brand_dark_brown"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="@string/start_planning"
+        android:textColor="@color/brand_dark_brown"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:alpha="0.6" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutRegUsername"
+        style="@style/Widget.Studreminder.BrutalInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:hint="@string/username_hint"
+        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/true_black"
+        app:boxStrokeWidth="2dp"
+        app:boxStrokeWidthFocused="3dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etRegUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="@color/brand_dark_brown"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutRegPassword"
+        style="@style/Widget.Studreminder.BrutalInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:hint="@string/password_hint"
+        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/true_black"
+        app:boxStrokeWidth="2dp"
+        app:boxStrokeWidthFocused="3dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etRegPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textColor="@color/brand_dark_brown"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutRegConfirmPassword"
+        style="@style/Widget.Studreminder.BrutalInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:hint="@string/confirm_password_hint"
+        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/true_black"
+        app:boxStrokeWidth="2dp"
+        app:boxStrokeWidthFocused="3dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etRegConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textColor="@color/brand_dark_brown"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRegister"
+        style="@style/Widget.Studreminder.BrutalButton"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:text="@string/signup_button" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account? "
+            android:textColor="@color/brand_dark_brown"
+            android:textStyle="bold"
+            android:alpha="0.7" />
+        <TextView
+            android:id="@+id/tvGoToLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:textColor="@color/brand_celtic_blue"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>
