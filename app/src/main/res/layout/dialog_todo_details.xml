@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <!-- TOP DECORATION -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="@drawable/ic_barcode" />
+
+        <View
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="40dp"
+            android:background="@color/brand_dark_brown" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/brand_celtic_blue" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvDialogSubject"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="ADET"
+            android:textColor="@color/brand_dark_brown"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvDialogDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_calendar"
+            android:drawablePadding="8dp"
+            android:text="SEP 10, 2026"
+            android:textColor="@color/accent_green"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:drawableTint="@color/accent_green" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/brand_celtic_blue" />
+
+    <TextView
+        android:id="@+id/tvDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="😃 App"
+        android:textColor="@color/brand_dark_brown"
+        android:textSize="32sp"
+        android:typeface="serif"
+        android:textStyle="italic" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/brand_celtic_blue" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_day_selected"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="4dp"
+        android:text="DESCRIPTION"
+        android:textColor="@color/brand_dark_brown"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/accent_yellow" />
+
+    <TextView
+        android:id="@+id/tvDialogDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="System"
+        android:textColor="@color/brand_dark_brown"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvDialogSubLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_day_selected"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="4dp"
+        android:text="SUBTO-DOS"
+        android:textColor="@color/brand_dark_brown"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/brutal_pink" />
+
+    <TextView
+        android:id="@+id/tvDialogSub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Steps here..."
+        android:textColor="@color/brand_dark_brown"
+        android:textSize="16sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/brand_celtic_blue" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnDialogEdit"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:text="Edit"
+            android:textAllCaps="false"
+            android:textColor="@color/brand_dark_brown"
+            app:strokeColor="@color/brand_dark_brown"
+            app:strokeWidth="1dp" />
+
+        <Button
+            android:id="@+id/btnDialogDelete"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:text="Delete"
+            android:textAllCaps="false"
+            android:textColor="@color/accent_red"
+            app:strokeColor="@color/accent_red"
+            app:strokeWidth="1dp" />
+    </LinearLayout>
+
+</LinearLayout>

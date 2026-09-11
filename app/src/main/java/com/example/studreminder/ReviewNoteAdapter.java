@@ -16,6 +16,7 @@ public class ReviewNoteAdapter
 
     private final List<ReviewNote> noteList;
     private final OnNoteDeleteListener deleteListener;
+    private final OnNoteClickListener clickListener;
 
     public interface OnNoteDeleteListener {
 
@@ -25,13 +26,19 @@ public class ReviewNoteAdapter
         );
     }
 
+    public interface OnNoteClickListener {
+        void onClick(ReviewNote note);
+    }
+
     public ReviewNoteAdapter(
             List<ReviewNote> noteList,
-            OnNoteDeleteListener deleteListener
+            OnNoteDeleteListener deleteListener,
+            OnNoteClickListener clickListener
     ) {
 
         this.noteList = noteList;
         this.deleteListener = deleteListener;
+        this.clickListener = clickListener;
     }
 
     public static class ViewHolder
@@ -99,6 +106,11 @@ public class ReviewNoteAdapter
                 reviewNote.getContent()
         );
 
+        holder.itemView.setOnClickListener(v -> {
+            if (clickListener != null) {
+                clickListener.onClick(reviewNote);
+            }
+        });
 
         holder.btnDeleteNote
                 .setOnClickListener(v -> {

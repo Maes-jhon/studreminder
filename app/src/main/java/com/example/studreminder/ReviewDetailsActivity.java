@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,8 +31,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
-
-import com.google.android.material.datepicker.MaterialDatePicker;
 
 public class ReviewDetailsActivity extends AppCompatActivity {
 
@@ -104,6 +103,10 @@ public class ReviewDetailsActivity extends AppCompatActivity {
     // ON CREATE
     // ==========================================================
 
+    private String currentFilter = "Ongoing";
+    private TextView tvTodoFilter;
+    private View layoutFilter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,8 +131,13 @@ public class ReviewDetailsActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabLayout);
         btnAdd = findViewById(R.id.btnAdd);
         btnImportWord = findViewById(R.id.btnImportWord);
+        
+        tvTodoFilter = findViewById(R.id.tvTodoFilter);
+        layoutFilter = findViewById(R.id.layoutFilter);
 
         databaseHelper = new DatabaseHelper(this);
+        
+        layoutFilter.setOnClickListener(v -> showFilterMenu());
 
         recyclerTodos.setLayoutManager(new LinearLayoutManager(this));
         recyclerNotes.setLayoutManager(new LinearLayoutManager(this));
@@ -252,13 +260,30 @@ public class ReviewDetailsActivity extends AppCompatActivity {
     // UPDATE TAB
     // ==========================================================
 
+    private void showFilterMenu() {
+        android.widget.PopupMenu popup = new android.widget.PopupMenu(this, tvTodoFilter);
+        popup.getMenu().add("Ongoing");
+        popup.getMenu().add("Missed");
+        popup.getMenu().add("Completed");
+
+        popup.setOnMenuItemClickListener(item -> {
+            currentFilter = item.getTitle().toString();
+            tvTodoFilter.setText(currentFilter);
+            loadTodos();
+            return true;
+        });
+        popup.show();
+    }
+
     private void updateTab(int position) {
         selectedTabPosition = position;
         hideAllContent();
         btnImportWord.setVisibility(View.GONE);
+        layoutFilter.setVisibility(View.GONE);
 
         if (position == 0) {
             btnAdd.setText("+ New To-do");
+            layoutFilter.setVisibility(View.VISIBLE);
             loadTodos();
         } else if (position == 1) {
             btnAdd.setText("+ Add Note");
@@ -302,53 +327,9 @@ public class ReviewDetailsActivity extends AppCompatActivity {
             return;
         }
 
-        View dialogView = getLayoutInflater().inflate(R.layout.dialog_new_todo, null);
-        TextInputEditText etTask = dialogView.findViewById(R.id.etTodoTask);
-        TextInputEditText etSub = dialogView.findViewById(R.id.etTodoSub);
-        TextInputEditText etDesc = dialogView.findViewById(R.id.etTodoDesc);
-        TextInputEditText etDeadline = dialogView.findViewById(R.id.etTodoDeadline);
-
-        etDeadline.setOnClickListener(v -> {
-            MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker()
-                    .setTitleText("Select Deadline")
-                    .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-                    .setTheme(R.style.BrandDatePicker)
-                    .build();
-
-            datePicker.addOnPositiveButtonClickListener(selection -> {
-                Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
-                calendar.setTimeInMillis(selection);
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-                etDeadline.setText(format.format(calendar.getTime()));
-            });
-
-            datePicker.show(getSupportFragmentManager(), "DEADLINE_PICKER");
-        });
-
-        new AlertDialog.Builder(this, R.style.Theme_Studreminder_Picker)
-                .setTitle("New To-do")
-                .setView(dialogView)
-                .setPositiveButton("Save", (dialog, which) -> {
-                    String task = etTask.getText() != null ? etTask.getText().toString().trim() : "";
-                    String sub = etSub.getText() != null ? etSub.getText().toString().trim() : "";
-                    String desc = etDesc.getText() != null ? etDesc.getText().toString().trim() : "";
-                    String deadline = etDeadline.getText() != null ? etDeadline.getText().toString().trim() : "";
-
-                    if (task.isEmpty()) {
-                        Toast.makeText(this, "Please enter a task name.", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
-                    boolean inserted = databaseHelper.insertTodo(reviewId, task, desc, sub, deadline);
-                    if (inserted) {
-                        Toast.makeText(this, "To-do added.", Toast.LENGTH_SHORT).show();
-                        loadTodos();
-                    } else {
-                        Toast.makeText(this, "Failed to add to-do.", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setNegativeButton("Cancel", null)
-                .show();
+        AddTodoBottomSheet bottomSheet = AddTodoBottomSheet.newInstance(reviewId);
+        bottomSheet.setOnTodoAddedListener(this::loadTodos);
+        bottomSheet.show(getSupportFragmentManager(), "ADD_TODO");
     }
 
     private void loadTodos() {
@@ -358,16 +339,171 @@ public class ReviewDetailsActivity extends AppCompatActivity {
         }
 
         todoList = databaseHelper.getTodosByReviewId(reviewId);
+        
+        // Apply Filter
+        ArrayList<Todo> filteredList = new ArrayList<>();
+        long now = System.currentTimeMillis();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+
+        for (Todo t : todoList) {
+            boolean isMissed = false;
+            if (!t.isCompleted() && t.getDeadline() != null && !t.getDeadline().isEmpty()) {
+                try {
+                    java.util.Date d = sdf.parse(t.getDeadline());
+                    if (d != null) {
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(d);
+                        cal.set(Calendar.HOUR_OF_DAY, 23);
+                        cal.set(Calendar.MINUTE, 59);
+                        if (now > cal.getTimeInMillis()) isMissed = true;
+                    }
+                } catch (Exception ignored) {}
+            }
+
+            if (currentFilter.equals("Completed") && t.isCompleted()) {
+                filteredList.add(t);
+            } else if (currentFilter.equals("Missed") && isMissed && !t.isCompleted()) {
+                filteredList.add(t);
+            } else if (currentFilter.equals("Ongoing") && !t.isCompleted() && !isMissed) {
+                filteredList.add(t);
+            }
+        }
+
         recyclerTodos.setVisibility(View.GONE);
 
-        if (todoList.isEmpty()) {
-            showEmptyState("Add your first to-do.");
+        if (filteredList.isEmpty()) {
+            showEmptyState("No " + currentFilter.toLowerCase() + " to-dos.");
         } else {
             emptyLayout.setVisibility(View.GONE);
             recyclerTodos.setVisibility(View.VISIBLE);
-            todoAdapter = new TodoAdapter(todoList);
+            todoAdapter = new TodoAdapter(filteredList, this::showViewTodoDialog);
             recyclerTodos.setAdapter(todoAdapter);
         }
+    }
+
+    private void showViewTodoDialog(Todo todo) {
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(60, 60, 60, 60);
+        layout.setBackgroundColor(ContextCompat.getColor(this, R.color.brand_ivory));
+
+        // Task Title
+        TextView tvTitle = new TextView(this);
+        tvTitle.setText(todo.getTask());
+        tvTitle.setTextSize(24);
+        tvTitle.setTypeface(null, android.graphics.Typeface.BOLD);
+        tvTitle.setTextColor(ContextCompat.getColor(this, R.color.brand_dark_brown));
+        layout.addView(tvTitle);
+
+        // Status Badge
+        TextView tvStatus = new TextView(this);
+        tvStatus.setTextSize(14);
+        tvStatus.setTypeface(null, android.graphics.Typeface.BOLD);
+        tvStatus.setTextColor(ContextCompat.getColor(this, R.color.brand_dark_brown));
+        tvStatus.setPadding(30, 10, 30, 10);
+        tvStatus.setGravity(android.view.Gravity.CENTER);
+        
+        LinearLayout.LayoutParams statusParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        statusParams.setMargins(0, 20, 0, 30);
+        tvStatus.setLayoutParams(statusParams);
+
+        // Determine Status (including Auto-Missed check)
+        String status = todo.getStatus();
+        if (status == null) status = "Pending";
+        
+        // Manual check for "Missed" logic here for the dialog
+        boolean isMissed = false;
+        String deadline = todo.getDeadline();
+        if (!todo.isCompleted() && deadline != null && !deadline.isEmpty()) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+                java.util.Date deadlineDate = sdf.parse(deadline);
+                if (deadlineDate != null) {
+                    Calendar calDeadline = Calendar.getInstance();
+                    calDeadline.setTime(deadlineDate);
+                    Calendar calToday = Calendar.getInstance();
+                    calToday.set(Calendar.HOUR_OF_DAY, 0);
+                    calToday.set(Calendar.MINUTE, 0);
+                    calToday.set(Calendar.SECOND, 0);
+                    calToday.set(Calendar.MILLISECOND, 0);
+                    if (calToday.after(calDeadline)) {
+                        isMissed = true;
+                    }
+                }
+            } catch (Exception ignored) {}
+        }
+
+        if (isMissed) status = "Missed";
+
+        tvStatus.setText(status);
+        if (status.equals("Ongoing") || status.equals("In Progress") || status.equals("Pending")) {
+            tvStatus.setBackgroundResource(R.drawable.bg_status_ongoing);
+        } else {
+            tvStatus.setBackgroundResource(R.drawable.bg_status_white);
+        }
+        layout.addView(tvStatus);
+
+        // Details Section (Scrollable)
+        androidx.core.widget.NestedScrollView scrollView = new androidx.core.widget.NestedScrollView(this);
+        LinearLayout detailsLayout = new LinearLayout(this);
+        detailsLayout.setOrientation(LinearLayout.VERTICAL);
+
+        // Subto-dos
+        if (todo.getSubTodos() != null && !todo.getSubTodos().isEmpty()) {
+            TextView tvSubLabel = new TextView(this);
+            tvSubLabel.setText("Subto-dos:");
+            tvSubLabel.setTypeface(null, android.graphics.Typeface.BOLD);
+            tvSubLabel.setTextColor(ContextCompat.getColor(this, R.color.brand_dark_brown));
+            tvSubLabel.setAlpha(0.6f);
+            detailsLayout.addView(tvSubLabel);
+
+            TextView tvSubValue = new TextView(this);
+            tvSubValue.setText(todo.getSubTodos());
+            tvSubValue.setTextSize(16);
+            tvSubValue.setTextColor(ContextCompat.getColor(this, R.color.brand_dark_brown));
+            tvSubValue.setPadding(0, 5, 0, 20);
+            detailsLayout.addView(tvSubValue);
+        }
+
+        // Description
+        if (todo.getDescription() != null && !todo.getDescription().isEmpty()) {
+            TextView tvDescLabel = new TextView(this);
+            tvDescLabel.setText("Description:");
+            tvDescLabel.setTypeface(null, android.graphics.Typeface.BOLD);
+            tvDescLabel.setTextColor(ContextCompat.getColor(this, R.color.brand_dark_brown));
+            tvDescLabel.setAlpha(0.6f);
+            detailsLayout.addView(tvDescLabel);
+
+            TextView tvDescValue = new TextView(this);
+            tvDescValue.setText(todo.getDescription());
+            tvDescValue.setTextSize(16);
+            tvDescValue.setTextColor(ContextCompat.getColor(this, R.color.brand_dark_brown));
+            tvDescValue.setPadding(0, 5, 0, 20);
+            detailsLayout.addView(tvDescValue);
+        }
+
+        scrollView.addView(detailsLayout);
+        layout.addView(scrollView, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, 0, 1.0f));
+
+        // Footer: Deadline
+        if (todo.getDeadline() != null && !todo.getDeadline().isEmpty()) {
+            TextView tvDeadline = new TextView(this);
+            tvDeadline.setText("Deadline: " + todo.getDeadline());
+            tvDeadline.setTextSize(14);
+            tvDeadline.setPadding(0, 20, 0, 0);
+            tvDeadline.setTextColor(ContextCompat.getColor(this, R.color.brand_dark_brown));
+            tvDeadline.setAlpha(0.6f);
+            layout.addView(tvDeadline);
+        }
+
+        new AlertDialog.Builder(this, R.style.Theme_Studreminder_Picker)
+                .setView(layout)
+                .setPositiveButton("Close", null)
+                .show();
     }
 
 
@@ -445,9 +581,41 @@ public class ReviewDetailsActivity extends AppCompatActivity {
         } else {
             emptyLayout.setVisibility(View.GONE);
             recyclerNotes.setVisibility(View.VISIBLE);
-            reviewNoteAdapter = new ReviewNoteAdapter(reviewNoteList, (reviewNote, position) -> showDeleteNoteConfirmation(reviewNote));
+            reviewNoteAdapter = new ReviewNoteAdapter(
+                    reviewNoteList,
+                    (reviewNote, position) -> showDeleteNoteConfirmation(reviewNote),
+                    this::showViewNoteDialog
+            );
             recyclerNotes.setAdapter(reviewNoteAdapter);
         }
+    }
+
+    private void showViewNoteDialog(ReviewNote note) {
+        TextView tvTitle = new TextView(this);
+        tvTitle.setText(note.getTitle());
+        tvTitle.setTextSize(24);
+        tvTitle.setTypeface(null, android.graphics.Typeface.BOLD);
+        tvTitle.setTextColor(ContextCompat.getColor(this, R.color.brand_dark_brown));
+        tvTitle.setPadding(60, 60, 60, 0);
+
+        TextView tvContent = new TextView(this);
+        tvContent.setText(note.getContent());
+        tvContent.setTextSize(16);
+        tvContent.setTextColor(ContextCompat.getColor(this, R.color.brand_dark_brown));
+        tvContent.setPadding(60, 40, 60, 60);
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.addView(tvTitle);
+
+        androidx.core.widget.NestedScrollView scrollView = new androidx.core.widget.NestedScrollView(this);
+        scrollView.addView(tvContent);
+        layout.addView(scrollView);
+
+        new AlertDialog.Builder(this, R.style.Theme_Studreminder_Picker)
+                .setView(layout)
+                .setPositiveButton("Close", null)
+                .show();
     }
 
     private void showDeleteNoteConfirmation(ReviewNote reviewNote) {

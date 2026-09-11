@@ -248,12 +248,8 @@ public class AppLockerService extends Service {
             layoutType = WindowManager.LayoutParams.TYPE_PHONE;
         }
 
-        int flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL |
-                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            flags |= WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED;
-        }
+        // Reduced flags to avoid IHwWindowManager permission issues on Honor/Huawei
+        int flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
 
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                 WindowManager.LayoutParams.MATCH_PARENT,

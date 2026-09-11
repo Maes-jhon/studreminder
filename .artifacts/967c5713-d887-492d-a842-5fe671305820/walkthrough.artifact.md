@@ -1,39 +1,30 @@
-# Walkthrough - Double Notification System for Class Schedule
+# Walkthrough - Expanded To-do View
 
-I have implemented a high-reliability "Double Notification" system for the Class Schedule, similar to Google Calendar but optimized for students.
+I have implemented a "Click to View" feature for To-do items, ensuring that all task details—including long descriptions and sub-tasks—are easily accessible in a professional, structured dialog.
 
 ## Changes Made
 
-### 1. Database Upgrade (DatabaseHelper.java)
-- **Safe Migration**: Bumped the database to Version 16 and used `ALTER TABLE` to add the `reminder_offset` column. Your existing classes are safe and haven't been deleted.
-- **Model Update**: Updated the `Schedule` object to carry the reminder setting throughout the app.
+### 1. Interactive To-do Cards (TodoAdapter.java)
+- **Click Support**: Added a click listener interface to the adapter. Now, tapping anywhere on a To-do card (not just the checkbox or status badge) will trigger the expanded view.
+- **Visual Feedback**: The card remains responsive and maintains its Neo-brutalist style during interaction.
 
-### 2. UI Enhancement (activity_add_schedule.xml)
-- **Reminder Dropdown**: Added a new "Reminder" field in the Add/Edit Schedule screen.
-- **Options**: You can now choose to be notified **5m, 15m, 30m, or 1h** before a class begins.
-
-### 3. Double-Alarm Logic (AddScheduleActivity.java)
-- **Automatic Multi-Scheduling**: Whenever you save a class, the app now sets **two separate alarms**:
-    - **Alarm 1 (Early)**: Triggers at your chosen time (e.g., 15 mins before).
-    - **Alarm 2 (On-Time)**: Triggers exactly when the class starts.
-- **Conflict Prevention**: I used unique request codes (`scheduleId` and `scheduleId + 10000`) so the two alarms never overwrite each other.
-
-### 4. Smart Notifications (ReminderReceiver.java)
-- **Dynamic Titles**:
-    - **Early**: "Class Starting Soon! 🏫"
-    - **On-Time**: "Class Started! 🚀"
-- **Contextual Info**: The notification now includes the **Subject** and **Room Number**, so you can head straight to class without opening the app.
+### 2. Structured Expansion Dialog (ReviewDetailsActivity.java)
+- **Comprehensive View**: Tapping a task opens a custom `AlertDialog` that displays:
+    - **Header**: Large, bold task name.
+    - **Status Indicator**: A visually matching badge (Ongoing/Completed/Missed) using the same logic as the main list.
+    - **Scrollable Details**: Dedicated sections for **Subto-dos** and **Description**, ensuring readability even for very long notes.
+    - **Footer**: The deadline is clearly displayed at the bottom with reduced opacity for a clean hierarchy.
+- **Consistent Branding**: The dialog uses the **So Matcha** theme, including the Ivory background and Dark Brown typography.
 
 ## Verification Results
 
 ### Build Status
-- **Success**: The project builds successfully with no errors.
+- **Success**: The project builds successfully with the new expansion logic.
 
-### Manual Verification Path
-1. **Add a Class**: Open "Add Schedule," fill in your subject and room, and set a 5-minute reminder.
-2. **Early Hit**: Set the start time to 6 minutes from now. You should receive a "Class Starting Soon!" notification in 1 minute.
-3. **On-Time Hit**: Wait 5 more minutes. You should receive a second "Class Started!" notification exactly as the class begins.
-4. **Edit Test**: Edit the class and change the reminder. The app will automatically update the alarms to the new time.
+### Functional Check
+- **Note Expansion**: Tapping a Note card opens the Note dialog.
+- **To-do Expansion**: Tapping a To-do card opens the new To-do detail dialog.
+- **Data Integrity**: All fields (Title, Sub-tasks, Description, Deadline) are correctly mapped from the database to the expanded view.
 
 > [!TIP]
-> Make sure to grant the "Exact Alarm" permission if prompted on Android 12+, otherwise the notifications might be delayed by the system battery saver.
+> This feature is especially useful for complex tasks like "Project Documentation" where you might have a long list of sub-tasks and detailed instructions saved in the description!

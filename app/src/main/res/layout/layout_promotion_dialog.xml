@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_brutal_card"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="32dp"
+    android:layout_margin="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RANK PROMOTED!"
+        android:textColor="@color/true_black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.2"
+        android:alpha="0.6" />
+
+    <TextView
+        android:id="@+id/tvNewRank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Academic Apprentice"
+        android:textColor="@color/true_black"
+        android:textSize="32sp"
+        android:typeface="serif"
+        android:gravity="center"
+        android:textStyle="bold|italic" />
+
+    <View
+        android:layout_width="80dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/brutal_yellow" />
+
+    <TextView
+        android:id="@+id/tvRewardText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Skill Unlocked: Bronze Stat Card"
+        android:textColor="@color/brand_celtic_blue"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnPromotionClaim"
+        style="@style/Widget.Studreminder.BrutalButton"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginTop="32dp"
+        android:text="CLAIM REWARD"
+        app:backgroundTint="@color/brutal_yellow" />
+
+</LinearLayout>

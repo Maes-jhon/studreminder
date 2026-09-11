@@ -51,10 +51,13 @@ public class WordImporter {
         while (eventType != XmlPullParser.END_DOCUMENT) {
             if (eventType == XmlPullParser.START_TAG) {
                 String name = parser.getName();
-                if (name.equals("t")) { // w:t tag for text
-                    sb.append(parser.nextText());
-                } else if (name.equals("p")) { // w:p tag for paragraph
-                    sb.append("\n");
+                if (name != null) {
+                    // Check for tags both with and without namespace prefix
+                    if (name.endsWith("t") && name.length() <= 3) { // Matches 't' or 'w:t'
+                        sb.append(parser.nextText());
+                    } else if (name.endsWith("p") && name.length() <= 3) { // Matches 'p' or 'w:p'
+                        sb.append("\n");
+                    }
                 }
             }
             eventType = parser.next();

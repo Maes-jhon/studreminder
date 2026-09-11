@@ -1,0 +1,5 @@
+- [ ] Fix `ClassCastException` in `SettingsActivity`
+    - [ ] Identify the mismatch between XML and Java code
+    - [ ] Update `SettingsActivity.java` or `activity_settings.xml` to match types
+    - [ ] Verify build and fix
+- [ ] Verify fix on device (via logcat check)

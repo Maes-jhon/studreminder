@@ -7,150 +7,325 @@
     android:clipToPadding="false"
     android:clipChildren="false">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/mainScroll"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        android:clipToPadding="false"
-        android:clipChildren="false"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <!-- HEADER -->
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="20dp"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:clipToPadding="false"
-            android:clipChildren="false">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <!-- GREETING & REPORT -->
-            <LinearLayout
-                android:id="@+id/topBar"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tvGreeting"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tvGreeting"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Good Morning!"
-                        android:textColor="#202735"
-                        android:textSize="27sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="Student"
-                        android:textColor="#687080"
-                        android:textSize="17sp" />
-                </LinearLayout>
-
-                <ImageButton
-                    android:id="@+id/btnHonorSettings"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/bg_round_button"
-                    android:contentDescription="HONOR"
-                    android:padding="12dp"
-                    android:src="@android:drawable/ic_menu_manage"
-                    app:tint="#202735" />
-
-                <ImageButton
-                    android:id="@+id/btnReport"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/bg_round_button"
-                    android:contentDescription="Report"
-                    android:padding="12dp"
-                    android:src="@android:drawable/ic_menu_myplaces"
-                    app:tint="#202735" />
-            </LinearLayout>
+                android:text="Hello, Maes"
+                android:textColor="@color/brand_dark_brown"
+                android:textSize="32sp"
+                android:typeface="serif"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Friday, July 31"
-                android:textColor="#8A919E"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/topBar" />
+                android:layout_marginTop="4dp"
+                android:text="Thursday, September 10"
+                android:textColor="@color/brand_dark_brown"
+                android:alpha="0.7"
+                android:textSize="16sp" />
+        </LinearLayout>
 
-            <!-- XP PROGRESS -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardXP"
+        <ImageButton
+            android:id="@+id/btnHonorSettings"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_manage"
+            android:contentDescription="Settings"
+            app:tint="@color/brand_dark_brown" />
+
+        <ImageButton
+            android:id="@+id/btnReport"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_myplaces"
+            android:contentDescription="Report"
+            app:tint="@color/brand_dark_brown" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintTop_toBottomOf="@id/header">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:clipToPadding="false"
+            android:clipChildren="false">
+
+            <!-- STUDENT STAT CARD (Gamer Style) -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cardStat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:cardBackgroundColor="@android:color/transparent"
-                app:cardElevation="0dp"
-                app:layout_constraintTop_toBottomOf="@id/tvDate">
+                android:layout_marginTop="10dp"
+                android:padding="24dp"
+                android:background="@drawable/bg_id_card">
 
+                <TextView
+                    android:id="@+id/tvStatName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="MAES"
+                    android:textColor="@color/true_black"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/cardLevelBadge"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvStatRank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Novice Scholar"
+                    android:textColor="@color/brand_celtic_blue"
+                    android:textSize="16sp"
+                    android:typeface="serif"
+                    android:textStyle="italic"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvStatName" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardLevelBadge"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    app:cardBackgroundColor="@color/brutal_yellow"
+                    app:cardCornerRadius="32dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/true_black"
+                    app:strokeWidth="3dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+                    <TextView
+                        android:id="@+id/tvStatLevel"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@color/true_black"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- XP SECTION -->
+                <LinearLayout
+                    android:id="@+id/xpSection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/tvStatRank">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ACHIEVEMENT PROGRESS"
+                            android:textColor="@color/true_black"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            android:alpha="0.6"
+                            android:letterSpacing="0.1" />
+                        <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1"/>
+                        <TextView
+                            android:id="@+id/tvXPText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="20 / 100 XP"
+                            android:textColor="@color/true_black"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/progressStatXP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:progress="20"
+                        app:indicatorColor="@color/true_black"
+                        app:trackColor="#CCE5F3"
+                        app:trackCornerRadius="6dp"
+                        app:trackThickness="14dp" />
+                </LinearLayout>
+
+                <!-- PILL BADGES (Academic Stats) -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_brutal_card"
-                    android:gravity="center_vertical"
+                    android:layout_marginTop="24dp"
                     android:orientation="horizontal"
-                    android:padding="16dp">
+                    app:layout_constraintTop_toBottomOf="@id/xpSection">
 
                     <TextView
-                        android:id="@+id/tvLevel"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/bg_circle_yellow"
-                        android:gravity="center"
-                        android:text="Lvl 1"
-                        android:textColor="#202735"
-                        android:textSize="12sp"
+                        android:id="@+id/pillSchool"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/brutal_box_yellow"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="4dp"
+                        android:text="TCU"
+                        android:textColor="@color/true_black"
+                        android:textSize="11sp"
                         android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/pillCourse"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/brutal_box_blue"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="4dp"
+                        android:text="BSIS"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        app:backgroundTint="@color/id_card_ssc_blue" />
 
+                    <TextView
+                        android:id="@+id/pillYear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/brutal_box_yellow"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="4dp"
+                        android:text="2ND YEAR"
+                        android:textColor="@color/true_black"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        app:backgroundTint="@color/brutal_pink" />
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- MISSION STATUS CARDS (Up Next) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:weightSum="2"
+                android:clipToPadding="false"
+                android:clipChildren="false">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardNextClass"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="10dp"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardElevation="0dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_brutal_card"
+                        android:orientation="vertical"
+                        android:padding="16dp">
                         <TextView
-                            android:id="@+id/tvRank"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Novice Scholar"
-                            android:textColor="#202735"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <com.google.android.material.progressindicator.LinearProgressIndicator
-                            android:id="@+id/progressXP"
-                            android:layout_width="match_parent"
+                            android:text="NEXT CLASS"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/brand_dark_brown"
+                            android:alpha="0.6" />
+                        <TextView
+                            android:id="@+id/tvSubject"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:progress="20"
-                            app:indicatorColor="@color/brand_celtic_blue"
-                            app:trackColor="@color/brand_ivory"
-                            app:trackCornerRadius="4dp"
-                            app:trackThickness="8dp" />
+                            android:layout_marginTop="4dp"
+                            android:text="None"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/brand_dark_brown" />
+                        <TextView
+                            android:id="@+id/tvTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="--"
+                            android:textSize="12sp"
+                            android:textColor="@color/brand_dark_brown"
+                            android:alpha="0.5" />
                     </LinearLayout>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardNextReview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardElevation="0dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_brutal_card"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NEXT REVIEW"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/brand_dark_brown"
+                            android:alpha="0.6" />
+                        <TextView
+                            android:id="@+id/tvReviewSubject"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="None"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/brand_dark_brown" />
+                        <TextView
+                            android:id="@+id/tvReviewTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="--"
+                            android:textSize="12sp"
+                            android:textColor="@color/brand_dark_brown"
+                            android:alpha="0.5" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
 
             <!-- PERMISSION BANNER -->
             <com.google.android.material.card.MaterialCardView
@@ -160,8 +335,7 @@
                 android:layout_marginTop="20dp"
                 android:visibility="gone"
                 app:cardBackgroundColor="@android:color/transparent"
-                app:cardElevation="0dp"
-                app:layout_constraintTop_toBottomOf="@id/cardXP">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -195,110 +369,92 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- TODAY'S MISSION -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardSchedule"
+            <!-- TODO SECTION HEADER -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                app:cardBackgroundColor="@android:color/transparent"
-                app:cardElevation="0dp"
-                app:layout_constraintTop_toBottomOf="@id/layoutPermissionBanner">
+                android:layout_marginTop="32dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="To-do"
+                    android:textColor="@color/brand_dark_brown"
+                    android:textSize="28sp"
+                    android:typeface="serif"
+                    android:textStyle="italic" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_brutal_card"
-                    android:orientation="vertical"
-                    android:padding="20dp">
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/brutal_box_blue"
+                    android:gravity="center"
+                    android:paddingHorizontal="12dp">
 
                     <TextView
-                        android:id="@+id/tvScheduleTitle"
+                        android:id="@+id/tvTodoFilter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Today's Mission"
-                        android:textColor="@color/brutal_black"
-                        android:textSize="18sp"
+                        android:text="Ongoing"
+                        android:textColor="@color/true_black"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tvSubject"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:text="No classes today"
-                        android:textColor="@color/brutal_black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/tvTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Enjoy your free time!"
-                        android:textColor="@color/brutal_gray"
-                        android:textSize="14sp" />
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@android:drawable/arrow_down_float"
+                        android:contentDescription="Filter"
+                        app:tint="@color/true_black" />
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
 
-            <!-- UPCOMING REVIEW -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardReview"
+                <ImageButton
+                    android:id="@+id/btnMotivation"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_circle_yellow"
+                    android:padding="8dp"
+                    android:src="@android:drawable/ic_menu_info_details"
+                    android:contentDescription="Motivation"
+                    app:tint="@color/true_black" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:id="@+id/btnAddTodoQuick"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/brutal_box_yellow"
+                    android:src="@drawable/ic_add"
+                    android:contentDescription="Add Todo"
+                    app:tint="@color/true_black" />
+            </LinearLayout>
+
+            <!-- TODO LIST -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerTodosMain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="40dp"
-                app:cardBackgroundColor="@android:color/transparent"
-                app:cardElevation="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardSchedule">
+                android:nestedScrollingEnabled="false" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_brutal_card"
-                    android:orientation="vertical"
-                    android:padding="20dp">
-
-                    <TextView
-                        android:id="@+id/tvReviewTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Upcoming Review"
-                        android:textColor="@color/brutal_black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvReviewSubject"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:text="No upcoming reviews"
-                        android:textColor="@color/brutal_black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/tvReviewTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Relax and recharge!"
-                        android:textColor="#333333"
-                        android:textSize="14sp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
     <include
         android:id="@+id/bottomNav"
         layout="@layout/bottom_navigation"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="77dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,12 +30,14 @@
 
             <TextView
                 android:id="@+id/tvSubject"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Programming"
                 android:textSize="21sp"
                 android:textStyle="bold"
-                android:textColor="@color/brand_dark_brown"/>
+                android:textColor="@color/brand_dark_brown"
+                android:maxLines="2"
+                android:ellipsize="end"/>
 
             <TextView
                 android:id="@+id/tvDay"
@@ -72,26 +74,31 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
-            android:paddingEnd="12dp">
+            android:paddingEnd="12dp"
+            android:paddingStart="4dp">
 
             <ImageButton
                 android:id="@+id/btnArchiveSchedule"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_action_button"
                 android:src="@drawable/ic_archive"
                 app:tint="@color/brand_dark_brown"
-                android:alpha="0.5"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
                 android:contentDescription="Archive" />
 
             <ImageButton
                 android:id="@+id/btnDeleteSchedule"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_action_button"
+                android:backgroundTint="#FFE5E5"
                 android:src="@android:drawable/ic_menu_delete"
                 app:tint="@color/accent_red"
-                android:alpha="0.8"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
                 android:contentDescription="Delete" />
         </LinearLayout>
     </LinearLayout>

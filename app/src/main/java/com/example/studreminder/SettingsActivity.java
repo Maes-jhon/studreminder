@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -17,12 +16,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
 public class SettingsActivity extends AppCompatActivity {
 
     private LinearLayout navHome, navSubjects, navCalendar, navSchedule, navSettings;
-    private MaterialCardView btnSelectApps, btnSetPin, btnExitApp, btnArchivedItems;
+    private MaterialCardView cardSelectApps, cardSetPin, cardArchivedItems;
+    private MaterialButton btnSettingsExit, btnSettingsLogout;
     private TextView tvCurrentPin;
     private SharedPreferences prefs;
 
@@ -33,31 +34,54 @@ public class SettingsActivity extends AppCompatActivity {
 
         prefs = getSharedPreferences("locker_prefs", Context.MODE_PRIVATE);
 
+        // Navigation
         navHome = findViewById(R.id.navHome);
         navSubjects = findViewById(R.id.navSubjects);
         navCalendar = findViewById(R.id.navCalendar);
         navSchedule = findViewById(R.id.navSchedule);
         navSettings = findViewById(R.id.navSettings);
 
-        btnSelectApps = findViewById(R.id.btnSelectApps);
-        btnSetPin = findViewById(R.id.btnSetPin);
-        btnExitApp = findViewById(R.id.btnExitApp);
-        btnArchivedItems = findViewById(R.id.btnArchivedItems);
+        // Buttons
+        cardSelectApps = findViewById(R.id.cardSelectApps);
+        cardArchivedItems = findViewById(R.id.cardArchivedItems);
+        cardSetPin = findViewById(R.id.cardSetPin);
+        btnSettingsLogout = findViewById(R.id.btnSettingsLogout);
+        btnSettingsExit = findViewById(R.id.btnSettingsExit);
+        
         tvCurrentPin = findViewById(R.id.tvCurrentPin);
-
         tvCurrentPin.setText(prefs.getString("EMERGENCY_PIN", "1234"));
 
-        btnSelectApps.setOnClickListener(v -> {
-            startActivity(new Intent(this, AppSelectionActivity.class));
-        });
+        if (cardSelectApps != null) {
+            cardSelectApps.setOnClickListener(v -> {
+                startActivity(new Intent(this, AppSelectionActivity.class));
+            });
+        }
 
-        btnSetPin.setOnClickListener(v -> showPinDialog());
+        cardSetPin.setOnClickListener(v -> showPinDialog());
 
-        btnArchivedItems.setOnClickListener(v -> {
+        cardArchivedItems.setOnClickListener(v -> {
             startActivity(new Intent(this, ArchivedItemsActivity.class));
         });
 
-        btnExitApp.setOnClickListener(v -> {
+        btnSettingsLogout.setOnClickListener(v -> {
+            new AlertDialog.Builder(this)
+                    .setTitle("Log out")
+                    .setMessage("Are you sure you want to sign out?")
+                    .setPositiveButton("Logout", (dialog, which) -> {
+                        getSharedPreferences("session", MODE_PRIVATE)
+                                .edit()
+                                .clear()
+                                .apply();
+                        Intent intent = new Intent(this, LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+        });
+
+        btnSettingsExit.setOnClickListener(v -> {
             new AlertDialog.Builder(this)
                     .setTitle("Exit App")
                     .setMessage("Are you sure you want to close the application?")
@@ -125,6 +149,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void colorTab(LinearLayout tab, int color) {
+        if (tab == null) return;
         for (int i = 0; i < tab.getChildCount(); i++) {
             View child = tab.getChildAt(i);
             if (child instanceof ImageView) {

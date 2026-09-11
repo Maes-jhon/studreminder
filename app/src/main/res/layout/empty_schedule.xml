@@ -15,20 +15,22 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="No schedules found"
-        android:textSize="22sp"
+        android:layout_marginTop="24dp"
+        android:text="Empty Mission Log"
+        android:textSize="26sp"
         android:textStyle="bold"
         android:textColor="@color/brand_dark_brown"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="You don't have any class for this day."
-        android:textSize="15sp"
+        android:layout_marginTop="12dp"
+        android:text="No classes detected for this day."
+        android:textSize="16sp"
+        android:gravity="center"
+        android:paddingHorizontal="40dp"
         android:textColor="@color/brand_dark_brown"
-        android:alpha="0.6"/>
+        android:alpha="0.7"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnEmptyAdd"

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Bottom-Right Hard Shadow (Increased Offset) -->
+    <item android:top="8dp" android:left="8dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/true_black" />
+            <corners android:radius="24dp" />
+        </shape>
+    </item>
+    <!-- Top Card Layer -->
+    <item android:bottom="8dp" android:right="8dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/id_card_blue" />
+            <stroke android:width="3dp" android:color="@color/true_black" />
+            <corners android:radius="24dp" />
+        </shape>
+    </item>
+</layer-list>

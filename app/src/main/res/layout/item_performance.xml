@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardElevation="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_brutal_card"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvDayName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monday"
+                android:textColor="@color/true_black"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDayStats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="4 Tasks • 2h 30m"
+                android:textColor="@color/true_black"
+                android:textSize="12sp"
+                android:alpha="0.6" />
+        </LinearLayout>
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progressDay"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:progress="75"
+            app:indicatorColor="@color/brutal_yellow"
+            app:trackColor="#F0F1F5"
+            app:trackCornerRadius="4dp"
+            app:trackThickness="6dp" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

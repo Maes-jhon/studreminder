@@ -146,6 +146,23 @@
             android:exported="false" />
 
         <activity
+            android:name=".ShareNoteActivity"
+            android:exported="true"
+            android:label="Share to Remindly"
+            android:theme="@style/Theme.Studreminder">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
             android:name=".MainActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />

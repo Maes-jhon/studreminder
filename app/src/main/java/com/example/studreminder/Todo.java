@@ -11,6 +11,9 @@ public class Todo {
     private String deadline;
     private String status;
     private boolean isArchived;
+    private String label;
+    private String labelType; // "CUSTOM" or "SUBJECT"
+    private int color;
 
     public Todo(
             int id,
@@ -21,7 +24,10 @@ public class Todo {
             String subTodos,
             String deadline,
             String status,
-            boolean isArchived
+            boolean isArchived,
+            String label,
+            String labelType,
+            int color
     ) {
         this.id = id;
         this.reviewId = reviewId;
@@ -32,6 +38,9 @@ public class Todo {
         this.deadline = deadline;
         this.status = status;
         this.isArchived = isArchived;
+        this.label = label;
+        this.labelType = labelType;
+        this.color = color;
     }
 
     public int getId() {
@@ -80,5 +89,29 @@ public class Todo {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public String getLabelType() {
+        return labelType;
+    }
+
+    public void setLabelType(String labelType) {
+        this.labelType = labelType;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 }

@@ -3,17 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F6FA">
+    android:background="@color/brand_ivory"
+    android:clipToPadding="false"
+    android:clipChildren="false">
 
+    <!-- HEADER -->
     <LinearLayout
         android:id="@+id/header"
-        android:layout_width="0dp"
-        android:layout_height="180dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="#202735"
         android:orientation="vertical"
-        android:padding="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:padding="20dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
@@ -29,112 +30,182 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:text="Weekly Performance"
             android:textColor="#FFFFFF"
             android:textSize="28sp"
-            android:textStyle="bold" />
-
+            android:typeface="serif"
+            android:textStyle="bold|italic" />
     </LinearLayout>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardSummary"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="-30dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:padding="20dp"
-            android:weightSum="2">
+            android:clipToPadding="false"
+            android:clipChildren="false">
 
-            <LinearLayout
-                android:layout_width="0dp"
+            <!-- PLAYER STAT SHEET -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cardStatSheet"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_id_card"
+                android:padding="24dp">
 
                 <TextView
-                    android:id="@+id/tvTotalTasks"
+                    android:id="@+id/tvStatTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textColor="@color/brand_vanilla"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:text="MISSION SUMMARY"
+                    android:textColor="@color/true_black"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:alpha="0.6"
+                    android:letterSpacing="0.1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/layoutTotals"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    app:layout_constraintTop_toBottomOf="@id/tvStatTitle">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tvTotalTasks"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="12"
+                            android:textColor="@color/true_black"
+                            android:textSize="32sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tasks Completed"
+                            android:textColor="@color/true_black"
+                            android:textSize="11sp"
+                            android:alpha="0.5"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@color/true_black"
+                        android:alpha="0.1" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tvTotalTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="12h 0m"
+                            android:textColor="@color/true_black"
+                            android:textSize="32sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Study Time"
+                            android:textColor="@color/true_black"
+                            android:textSize="11sp"
+                            android:alpha="0.5"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@color/true_black"
+                    android:alpha="0.1"
+                    app:layout_constraintTop_toBottomOf="@id/layoutTotals" />
 
                 <TextView
+                    android:id="@+id/tvNextRankLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tasks Completed"
-                    android:textColor="@color/brand_tea_green"
-                    android:textSize="12sp" />
-            </LinearLayout>
+                    android:layout_marginTop="20dp"
+                    android:text="ROAD TO ACADEMIC APPRENTICE"
+                    android:textColor="@color/true_black"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:alpha="0.6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider" />
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#EEEEEE" />
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/progressRankXP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:progress="60"
+                    app:indicatorColor="@color/brand_celtic_blue"
+                    app:trackColor="#CCE5F3"
+                    app:trackCornerRadius="4dp"
+                    app:trackThickness="12dp"
+                    app:layout_constraintTop_toBottomOf="@id/tvNextRankLabel" />
 
-            <LinearLayout
-                android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/tvXPToNextRank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="40 XP to go"
+                    android:textColor="@color/brand_celtic_blue"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/progressRankXP" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="32dp"
+                android:text="Daily Missions"
+                android:textColor="@color/brand_dark_brown"
+                android:textSize="22sp"
+                android:typeface="serif"
+                android:textStyle="bold|italic" />
 
-                <TextView
-                    android:id="@+id/tvTotalTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0h"
-                    android:textColor="@color/brand_vanilla"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Study Time"
-                    android:textColor="@color/brand_tea_green"
-                    android:textSize="12sp" />
-            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerDaily"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:nestedScrollingEnabled="false" />
 
         </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <TextView
-        android:id="@+id/tvLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
-        android:text="Daily Progress"
-        android:textColor="#202735"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardSummary" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerDaily"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:paddingHorizontal="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvLabel" />
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

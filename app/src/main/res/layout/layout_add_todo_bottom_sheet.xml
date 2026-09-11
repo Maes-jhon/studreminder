@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- HANDLE -->
+        <View
+            android:layout_width="40dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:background="@color/brutal_gray"
+            android:alpha="0.3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To-do"
+            android:textColor="@color/true_black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etTodoTask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/brutal_box_white"
+            android:hint="Enter to-do"
+            android:padding="12dp"
+            android:textColor="@color/true_black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Label"
+            android:textColor="@color/true_black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <!-- LABEL TOGGLE (Segmented Control) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/btnLabelCustom"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/brutal_box_yellow"
+                android:gravity="center"
+                android:text="Custom"
+                android:textColor="@color/true_black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnLabelSubjects"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/brutal_box_white"
+                android:gravity="center"
+                android:text="Subjects"
+                android:textColor="@color/true_black"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- SELECT LABEL DROPDOWN / EDITTEXT -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
+
+            <EditText
+                android:id="@+id/etCustomLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/brutal_box_white"
+                android:hint="Enter custom label"
+                android:padding="12dp"
+                android:textColor="@color/true_black"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:id="@+id/layoutSubjectPicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/brutal_box_white"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:padding="12dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvSelectedSubject"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Select a subject"
+                    android:textColor="@color/true_black"
+                    android:alpha="0.4"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@android:drawable/arrow_down_float"
+                    app:tint="@color/true_black" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <!-- SUBTO-DOS -->
+        <LinearLayout
+            android:id="@+id/btnToggleSubTodos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Subto-dos"
+                android:textColor="@color/true_black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@android:drawable/ic_media_play"
+                app:tint="@color/true_black" />
+        </LinearLayout>
+
+        <!-- SUBTODOS LIST / INPUT (Collapsible or always visible for simplicity in add) -->
+        <EditText
+            android:id="@+id/etSubTodos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/brutal_box_white"
+            android:hint="Break down into steps..."
+            android:minLines="2"
+            android:gravity="top"
+            android:padding="12dp"
+            android:textColor="@color/true_black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Description"
+            android:textColor="@color/true_black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etTodoDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/brutal_box_white"
+            android:hint="Enter a description"
+            android:minLines="3"
+            android:gravity="top"
+            android:padding="12dp"
+            android:textColor="@color/true_black"
+            android:textSize="14sp" />
+
+        <!-- DEADLINE -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Deadline"
+                android:textColor="@color/true_black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchDeadline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:thumbTint="@color/brutal_yellow"
+                app:trackTint="@color/brutal_gray" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvDeadlineValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/brutal_box_white"
+            android:padding="12dp"
+            android:text="No deadline set"
+            android:textColor="@color/true_black"
+            android:textSize="14sp"
+            android:alpha="0.4"
+            android:visibility="gone" />
+
+        <!-- CREATE BUTTON -->
+        <Button
+            android:id="@+id/btnCreateTodo"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#E0E0E0"
+            android:text="Create"
+            android:textAllCaps="false"
+            android:textColor="#9E9E9E"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="16dp" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

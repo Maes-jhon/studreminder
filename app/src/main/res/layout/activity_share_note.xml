@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/brand_ivory"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Share to Remindly"
+            android:textColor="@color/brand_dark_brown"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_brutal_card"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Studreminder.BrutalInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Note Title"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxStrokeColor="@color/true_black"
+                    app:boxStrokeWidth="2dp"
+                    app:boxStrokeWidthFocused="3dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etShareTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/brand_dark_brown" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Studreminder.BrutalInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="Content"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxStrokeColor="@color/true_black"
+                    app:boxStrokeWidth="2dp"
+                    app:boxStrokeWidthFocused="3dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etShareContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minLines="5"
+                        android:gravity="top"
+                        android:textColor="@color/brand_dark_brown" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Studreminder.BrutalInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="Select Subject"
+                    app:endIconMode="dropdown_menu"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxStrokeColor="@color/true_black"
+                    app:boxStrokeWidth="2dp"
+                    app:boxStrokeWidthFocused="3dp">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/dropdownSubjects"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/brand_dark_brown" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Studreminder.BrutalInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="Select Review Session"
+                    app:endIconMode="dropdown_menu"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxStrokeColor="@color/true_black"
+                    app:boxStrokeWidth="2dp"
+                    app:boxStrokeWidthFocused="3dp">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/dropdownReviews"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/brand_dark_brown" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSaveSharedNote"
+                    style="@style/Widget.Studreminder.BrutalButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="24dp"
+                    android:text="Save Note" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</ScrollView>

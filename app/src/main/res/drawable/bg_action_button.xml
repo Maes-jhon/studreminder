@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- 1. The hard black shadow (shifted down and right) -->
-    <item android:top="4dp" android:left="4dp">
+    <item android:top="2dp" android:left="2dp">
         <shape android:shape="rectangle">
             <solid android:color="@color/true_black" />
-            <corners android:radius="12dp" />
+            <corners android:radius="8dp" />
         </shape>
     </item>
-
-    <!-- 2. The button body (shifted up and left) -->
-    <item android:bottom="4dp" android:right="4dp">
+    <item android:bottom="2dp" android:right="2dp">
         <shape android:shape="rectangle">
-            <solid android:color="@color/accent_yellow" />
+            <solid android:color="@color/white" />
             <stroke android:width="2dp" android:color="@color/true_black" />
-            <corners android:radius="12dp" />
+            <corners android:radius="8dp" />
         </shape>
     </item>
 </layer-list>

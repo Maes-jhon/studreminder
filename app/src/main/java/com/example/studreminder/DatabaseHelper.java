@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "StudentReminder.db";
-    public static final int DATABASE_VERSION = 16;
+    public static final int DATABASE_VERSION = 19;
 
     // ==========================
     // SCHEDULE TABLE
@@ -60,6 +60,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_TODO_SUB = "sub_todos";
     public static final String COL_TODO_DEADLINE = "deadline";
     public static final String COL_TODO_STATUS = "status";
+    public static final String COL_TODO_EMOJI = "emoji";
+    public static final String COL_TODO_COLOR = "color";
+    public static final String COL_TODO_LABEL = "label";
+    public static final String COL_TODO_LABEL_TYPE = "label_type";
 
     // ==========================
     // REVIEW FILE TABLE
@@ -104,6 +108,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_USER_ID = "user_id";
     public static final String COL_USERNAME = "username";
     public static final String COL_PASSWORD = "password";
+    public static final String COL_FULL_NAME = "full_name";
+    public static final String COL_SCHOOL = "school";
+    public static final String COL_BIRTHDAY = "birthday";
+    public static final String COL_YEAR_LEVEL = "year_level";
+    public static final String COL_COURSE = "course";
+    public static final String COL_PROFILE_IMAGE = "profile_image";
 
     // ==========================
     // DATABASE CONSTRUCTOR
@@ -154,7 +164,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COL_TODO_SUB + " TEXT, " +
                 COL_TODO_DEADLINE + " TEXT, " +
                 COL_TODO_STATUS + " TEXT DEFAULT 'Pending', " +
-                COL_IS_ARCHIVED + " INTEGER NOT NULL DEFAULT 0" +
+                COL_IS_ARCHIVED + " INTEGER NOT NULL DEFAULT 0, " +
+                COL_TODO_EMOJI + " TEXT, " +
+                COL_TODO_COLOR + " INTEGER, " +
+                COL_TODO_LABEL + " TEXT, " +
+                COL_TODO_LABEL_TYPE + " TEXT" +
                 ")");
 
         db.execSQL("CREATE TABLE " + TABLE_REVIEW_FILE + " (" +
@@ -188,7 +202,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLE_USER + " (" +
                 COL_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COL_USERNAME + " TEXT NOT NULL, " +
-                COL_PASSWORD + " TEXT NOT NULL" +
+                COL_PASSWORD + " TEXT NOT NULL, " +
+                COL_FULL_NAME + " TEXT, " +
+                COL_SCHOOL + " TEXT, " +
+                COL_BIRTHDAY + " TEXT, " +
+                COL_YEAR_LEVEL + " TEXT, " +
+                COL_COURSE + " TEXT, " +
+                COL_PROFILE_IMAGE + " TEXT" +
                 ")");
     }
 
@@ -214,6 +234,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         if (oldVersion < 16) {
             db.execSQL("ALTER TABLE " + TABLE_SCHEDULE + " ADD COLUMN " + COL_SCHEDULE_REMINDER + " TEXT");
+        }
+        if (oldVersion < 17) {
+            // User table profile fields
+            db.execSQL("ALTER TABLE " + TABLE_USER + " ADD COLUMN " + COL_FULL_NAME + " TEXT");
+            db.execSQL("ALTER TABLE " + TABLE_USER + " ADD COLUMN " + COL_SCHOOL + " TEXT");
+            db.execSQL("ALTER TABLE " + TABLE_USER + " ADD COLUMN " + COL_BIRTHDAY + " TEXT");
+            db.execSQL("ALTER TABLE " + TABLE_USER + " ADD COLUMN " + COL_YEAR_LEVEL + " TEXT");
+            db.execSQL("ALTER TABLE " + TABLE_USER + " ADD COLUMN " + COL_PROFILE_IMAGE + " TEXT");
+
+            // Todo table enhancements
+            db.execSQL("ALTER TABLE " + TABLE_TODO + " ADD COLUMN " + COL_TODO_EMOJI + " TEXT");
+            db.execSQL("ALTER TABLE " + TABLE_TODO + " ADD COLUMN " + COL_TODO_COLOR + " INTEGER");
+        }
+        if (oldVersion < 18) {
+            db.execSQL("ALTER TABLE " + TABLE_TODO + " ADD COLUMN " + COL_TODO_LABEL + " TEXT");
+            db.execSQL("ALTER TABLE " + TABLE_TODO + " ADD COLUMN " + COL_TODO_LABEL_TYPE + " TEXT");
+        }
+        if (oldVersion < 19) {
+            db.execSQL("ALTER TABLE " + TABLE_USER + " ADD COLUMN " + COL_COURSE + " TEXT");
         }
     }
 
@@ -449,7 +488,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // ==========================================================
     // TODO FUNCTIONS
     // ==========================================================
-    public boolean insertTodo(int reviewId, String task, String description, String subTodos, String deadline) {
+    public boolean insertTodo(int reviewId, String task, String description, String subTodos, String deadline, String label, String labelType) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COL_TODO_REVIEW_ID, reviewId);
@@ -458,7 +497,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COL_TODO_DESC, description);
         values.put(COL_TODO_SUB, subTodos);
         values.put(COL_TODO_DEADLINE, deadline);
-        values.put(COL_TODO_STATUS, "Pending");
+        values.put(COL_TODO_STATUS, "Ongoing");
+        values.put(COL_TODO_LABEL, label);
+        values.put(COL_TODO_LABEL_TYPE, labelType);
 
         long result = db.insert(TABLE_TODO, null, values);
         db.close();
@@ -481,7 +522,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         cursor.getString(cursor.getColumnIndexOrThrow(COL_TODO_SUB)),
                         cursor.getString(cursor.getColumnIndexOrThrow(COL_TODO_DEADLINE)),
                         cursor.getString(cursor.getColumnIndexOrThrow(COL_TODO_STATUS)),
-                        cursor.getInt(cursor.getColumnIndexOrThrow(COL_IS_ARCHIVED)) == 1
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COL_IS_ARCHIVED)) == 1,
+                        cursor.getString(cursor.getColumnIndexOrThrow(COL_TODO_LABEL)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COL_TODO_LABEL_TYPE)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COL_TODO_COLOR))
                 ));
             } while (cursor.moveToNext());
         }
@@ -606,7 +650,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         cursor.getString(cursor.getColumnIndexOrThrow(COL_TODO_SUB)),
                         cursor.getString(cursor.getColumnIndexOrThrow(COL_TODO_DEADLINE)),
                         cursor.getString(cursor.getColumnIndexOrThrow(COL_TODO_STATUS)),
-                        cursor.getInt(cursor.getColumnIndexOrThrow(COL_IS_ARCHIVED)) == 1
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COL_IS_ARCHIVED)) == 1,
+                        cursor.getString(cursor.getColumnIndexOrThrow(COL_TODO_LABEL)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COL_TODO_LABEL_TYPE)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COL_TODO_COLOR))
                 ));
             } while (cursor.moveToNext());
         }
@@ -793,6 +840,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return exists;
+    }
+
+    // ==========================
+    // USER PROFILE FUNCTIONS
+    // ==========================
+    public boolean updateProfile(int userId, String fullName, String school, String course, String birthday, String yearLevel, String profileImage) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_FULL_NAME, fullName);
+        values.put(COL_SCHOOL, school);
+        values.put(COL_COURSE, course);
+        values.put(COL_BIRTHDAY, birthday);
+        values.put(COL_YEAR_LEVEL, yearLevel);
+        values.put(COL_PROFILE_IMAGE, profileImage);
+
+        int result = db.update(TABLE_USER, values, COL_USER_ID + "=?", new String[]{String.valueOf(userId)});
+        db.close();
+        return result > 0;
+    }
+
+    public Cursor getUserProfile(String username) {
+        SQLiteDatabase db = getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + TABLE_USER + " WHERE " + COL_USERNAME + "=?", new String[]{username});
     }
 
     // ==========================================================

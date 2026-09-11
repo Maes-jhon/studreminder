@@ -1,5 +1,4 @@
-- [x] Update `DatabaseHelper.java` (Bump to V16, add `reminder_offset` to `schedule` table)
-- [x] Update `activity_add_schedule.xml` (Add Reminder dropdown UI)
-- [x] Update `AddScheduleActivity.java` (Implement double alarm scheduling logic)
-- [x] Refine `ReminderReceiver.java` (Support on-time and early class alerts)
-- [x] Verify build and double-notification functionality
+- [x] Update `TodoAdapter.java` (Add click listener interface and hook up `itemView`)
+- [x] Implement `showViewTodoDialog` in `ReviewDetailsActivity.java`
+- [x] Update `loadTodos()` in `ReviewDetailsActivity.java` to pass the listener
+- [x] Verify build and functionality

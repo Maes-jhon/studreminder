@@ -13,11 +13,11 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginTop="60dp"
-        android:src="@drawable/ic_lock"
+        android:src="@drawable/ic_lock_chunky"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/brand_celtic_blue" />
+        app:tint="@color/brand_dark_brown" />
 
     <TextView
         android:id="@+id/tvFocusTitle"
@@ -38,8 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="25:00"
-        android:textColor="@color/brand_celtic_blue"
-        android:textSize="48sp"
+        android:textColor="@color/brand_dark_brown"
+        android:textSize="56sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,28 +73,21 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSubmitPin"
+            style="@style/Widget.Studreminder.BrutalButton"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="60dp"
             android:layout_marginTop="12dp"
-            android:text="Submit PIN"
-            android:textColor="@color/brand_dark_brown"
-            android:textStyle="bold"
-            app:backgroundTint="@color/accent_yellow"
-            app:strokeColor="@color/true_black"
-            app:strokeWidth="2dp" />
+            android:text="Submit PIN" />
     </LinearLayout>
 
     <!-- UNLOCK BUTTON (Ipapakita para buksan ang PIN container) -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnUnlock"
+        style="@style/Widget.Studreminder.BrutalButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginTop="24dp"
         android:text="Unlock"
-        android:textColor="@color/brand_dark_brown"
-        app:backgroundTint="@color/accent_yellow"
-        app:strokeColor="@color/true_black"
-        app:strokeWidth="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pinContainer" />

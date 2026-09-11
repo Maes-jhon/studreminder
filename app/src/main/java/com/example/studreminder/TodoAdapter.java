@@ -6,12 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
@@ -24,28 +22,30 @@ public class TodoAdapter
         extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
 
     private final List<Todo> todoList;
+    private final OnTodoClickListener clickListener;
 
-    public TodoAdapter(List<Todo> todoList) {
+    public interface OnTodoClickListener {
+        void onClick(Todo todo);
+    }
+
+    public TodoAdapter(List<Todo> todoList, OnTodoClickListener clickListener) {
         this.todoList = todoList;
+        this.clickListener = clickListener;
     }
 
     public static class ViewHolder
             extends RecyclerView.ViewHolder {
 
         CheckBox checkTodo;
-        TextView tvTodoTask, tvTodoDesc, tvTodoDeadline, tvStatusBadge;
-        ImageButton btnArchiveTodo, btnDeleteTodo;
+        TextView tvTodoTask, tvTodoLabel, tvStatusBadge;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             checkTodo = itemView.findViewById(R.id.checkTodo);
             tvTodoTask = itemView.findViewById(R.id.tvTodoTask);
-            tvTodoDesc = itemView.findViewById(R.id.tvTodoDesc);
-            tvTodoDeadline = itemView.findViewById(R.id.tvTodoDeadline);
+            tvTodoLabel = itemView.findViewById(R.id.tvTodoLabel);
             tvStatusBadge = itemView.findViewById(R.id.tvStatusBadge);
-            btnArchiveTodo = itemView.findViewById(R.id.btnArchiveTodo);
-            btnDeleteTodo = itemView.findViewById(R.id.btnDeleteTodo);
         }
     }
 
@@ -77,22 +77,27 @@ public class TodoAdapter
         DatabaseHelper db = new DatabaseHelper(holder.itemView.getContext());
 
         holder.tvTodoTask.setText(todo.getTask());
-        holder.tvTodoDesc.setText(todo.getDescription());
-        holder.tvTodoDeadline.setText("Deadline: " + todo.getDeadline());
-
-        String status = todo.getStatus();
-        if (status == null) status = "Pending";
-
-        // Auto-Missed Logic
+        
+        String label = todo.getLabel();
+        if (label == null || label.isEmpty()) label = "General";
+        holder.tvTodoLabel.setText(label);
+        
+        // Status Logic
+        String status = todo.isCompleted() ? "Completed" : "Ongoing";
         if (!todo.isCompleted() && isPastDeadline(todo.getDeadline())) {
             status = "Missed";
         }
-
-        holder.tvStatusBadge.setText(status);
-        updateStatusBadgeUI(holder.tvStatusBadge, status);
+        
+        updateStatusBadge(holder.tvStatusBadge, status);
 
         holder.checkTodo.setOnCheckedChangeListener(null);
         holder.checkTodo.setChecked(todo.isCompleted());
+
+        holder.itemView.setOnClickListener(v -> {
+            if (clickListener != null) {
+                clickListener.onClick(todo);
+            }
+        });
 
         updateTaskStyle(
                 holder.tvTodoTask,
@@ -103,61 +108,28 @@ public class TodoAdapter
                 (buttonView, isChecked) -> {
 
                     todo.setCompleted(isChecked);
-                    String newStatus = isChecked ? "Completed" : "Pending";
-                    todo.setStatus(newStatus);
-
                     updateTaskStyle(
                             holder.tvTodoTask,
                             isChecked
                     );
 
-                    holder.tvStatusBadge.setText(newStatus);
-                    updateStatusBadgeUI(holder.tvStatusBadge, newStatus);
-
-                    db.updateTodoStatus(todo.getId(), newStatus);
+                    db.updateTodoCompleted(todo.getId(), isChecked);
+                    
+                    // Refresh status badge
+                    String newStatus = isChecked ? "Completed" : (isPastDeadline(todo.getDeadline()) ? "Missed" : "Ongoing");
+                    updateStatusBadge(holder.tvStatusBadge, newStatus);
 
                     if (isChecked) {
                         XPManager xp = new XPManager(holder.itemView.getContext());
-                        xp.addXP(10);
-                        Toast.makeText(holder.itemView.getContext(), "+10 XP! Keep going!", Toast.LENGTH_SHORT).show();
+                        boolean rankUp = xp.addXP(10);
+                        Toast.makeText(holder.itemView.getContext(), "+10 XP! Mission Completed!", Toast.LENGTH_SHORT).show();
+                        
+                        if (rankUp && holder.itemView.getContext() instanceof MainActivity) {
+                            ((MainActivity) holder.itemView.getContext()).showPromotionDialog(xp.getRank());
+                        }
                     }
                 }
         );
-
-        holder.tvStatusBadge.setOnClickListener(v -> {
-            if (todo.isCompleted()) return;
-
-            String currentStatus = todo.getStatus();
-            String nextStatus = "Pending";
-
-            if (currentStatus.equals("Pending")) nextStatus = "In Progress";
-            else if (currentStatus.equals("In Progress")) nextStatus = "Completed";
-
-            todo.setStatus(nextStatus);
-            holder.tvStatusBadge.setText(nextStatus);
-            updateStatusBadgeUI(holder.tvStatusBadge, nextStatus);
-
-            if (nextStatus.equals("Completed")) {
-                todo.setCompleted(true);
-                holder.checkTodo.setChecked(true);
-                updateTaskStyle(holder.tvTodoTask, true);
-            }
-
-            db.updateTodoStatus(todo.getId(), nextStatus);
-        });
-
-        holder.btnArchiveTodo.setOnClickListener(v -> {
-            db.archiveItem(DatabaseHelper.TABLE_TODO, DatabaseHelper.COL_TODO_ID, todo.getId());
-            todoList.remove(position);
-            notifyItemRemoved(position);
-            Toast.makeText(holder.itemView.getContext(), "Item archived", Toast.LENGTH_SHORT).show();
-        });
-
-        holder.btnDeleteTodo.setOnClickListener(v -> {
-            db.deleteTodo(todo.getId());
-            todoList.remove(position);
-            notifyItemRemoved(position);
-        });
     }
 
     private boolean isPastDeadline(String deadline) {
@@ -169,36 +141,33 @@ public class TodoAdapter
 
             Calendar calDeadline = Calendar.getInstance();
             calDeadline.setTime(deadlineDate);
+            calDeadline.set(Calendar.HOUR_OF_DAY, 23);
+            calDeadline.set(Calendar.MINUTE, 59);
 
-            Calendar calToday = Calendar.getInstance();
-            calToday.set(Calendar.HOUR_OF_DAY, 0);
-            calToday.set(Calendar.MINUTE, 0);
-            calToday.set(Calendar.SECOND, 0);
-            calToday.set(Calendar.MILLISECOND, 0);
-
-            return calToday.after(calDeadline);
+            return Calendar.getInstance().after(calDeadline);
         } catch (Exception e) {
             return false;
         }
     }
 
-    private void updateStatusBadgeUI(TextView badge, String status) {
-        int color;
+    private void updateStatusBadge(TextView badge, String status) {
+        badge.setText(status);
         switch (status) {
-            case "In Progress":
-                color = ContextCompat.getColor(badge.getContext(), R.color.brand_celtic_blue);
-                break;
             case "Completed":
-                color = ContextCompat.getColor(badge.getContext(), R.color.brand_tea_green);
+                badge.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_check, 0, 0, 0);
+                badge.setAlpha(0.6f);
                 break;
             case "Missed":
-                color = ContextCompat.getColor(badge.getContext(), R.color.accent_red);
+                badge.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_clock_simple, 0, 0, 0);
+                badge.setTextColor(Color.parseColor("#E53935")); // Red
+                badge.setAlpha(1.0f);
                 break;
-            default: // Pending
-                color = ContextCompat.getColor(badge.getContext(), R.color.accent_yellow);
+            default: // Ongoing
+                badge.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_clock_simple, 0, 0, 0);
+                badge.setTextColor(Color.parseColor("#343B1B")); // Dark Brown
+                badge.setAlpha(1.0f);
                 break;
         }
-        badge.setBackgroundTintList(android.content.res.ColorStateList.valueOf(color));
     }
 
     private void updateTaskStyle(

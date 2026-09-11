@@ -17,6 +17,12 @@
     <color name="brutal_bg_soft">#EDF2FF</color>
     <color name="brutal_gray">#8A7B6D</color>
 
+    <!-- ID Card Palette -->
+    <color name="id_card_blue">#BDD7EE</color>
+    <color name="id_card_text_label">#5B9BD5</color>
+    <color name="id_card_text_value">#000000</color>
+    <color name="id_card_ssc_blue">#4472C4</color>
+
     <!-- So Matcha Palette -->
     <color name="brand_ivory">#FBFCEE</color>
     <color name="brand_vanilla">#F6E6A5</color>

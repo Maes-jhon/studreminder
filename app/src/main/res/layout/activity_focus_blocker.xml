@@ -11,11 +11,11 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginTop="80dp"
-        android:src="@drawable/ic_lock"
+        android:src="@drawable/ic_lock_chunky"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/brand_celtic_blue" />
+        app:tint="@color/brand_dark_brown" />
 
     <TextView
         android:id="@+id/tvFocusTitle"
@@ -50,8 +50,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="25:00"
-        android:textColor="@color/brand_celtic_blue"
-        android:textSize="48sp"
+        android:textColor="@color/brand_dark_brown"
+        android:textSize="56sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
